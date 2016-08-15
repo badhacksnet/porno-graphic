@@ -1,0 +1,38 @@
+Palette Data
+============
+Each system has its own format for palette data. Some systems have a fixed
+palette, while others allow for a range of colors based on components.
+
+1BPP
+====
+1BPP palette data is typically black=0 and white=1, but can be changed.
+
+0 = #000000
+1 = #111111
+
+2BPP
+====
+Various systems use 2BPP palettes, each having a different format.
+Furthermore, some systems generate their colors instead of having fixed values.
+
+3BPP
+====
+Only really used on SNES??
+
+4BPP
+====
+Many variations of 4BPP formats exist.
+
+8BPP
+====
+This is the standard palette data, using 0-255 per component.
+
+Others
+======
+There are many nonstandard formats...
+We won't be worrying about most of them until much later.
+
+PROMS
+=====
+Special care should be taken for games where the palette data is stored in a
+separate file (or files). We might be able to load the data and use it.

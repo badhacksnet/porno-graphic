@@ -1,0 +1,283 @@
+Tile Format Information
+=======================
+
+Terminology
+-----------
+* BPP
+Bits per pixel.
+
+* Chunky
+
+* Planar
+
+Example character
+-----------------
+The example character given in most of the formats is an 8x8 capital A.
+
+A visual representation, where '.' is a blank space and '#' is a filled pixel:
+.######..
+##....##.
+##....##.
+########.
+##....##.
+##....##.
+##....##.
+.........
+
+1BPP 8x8 (Standard/Horizontal)
+------------------------------
+One byte = one row of pixels, from left to right.
+
+[Other Programs]
+Tile Molester: "1bpp planar", "1bpp linear" (essentially the same)
+YY-CHR.net:    "1bpp 8x8"
+
+[Binary View]
+76543210
+-----------------
+01111100 - row 1 (hex: 0x7C)
+11000110 - row 2 (hex: 0xC6)
+11000110 - row 3 (hex: 0xC6)
+11111110 - row 4 (hex: 0xFE)
+11000110 - row 5 (hex: 0xC6)
+11000110 - row 6 (hex: 0xC6)
+11000110 - row 7 (hex: 0xC6)
+00000000 - row 8 (hex: 0x00)
+
+1BPP Vertical 8x8 (d0)
+----------------------
+One byte = one column of pixels. (d0 = first pixel in column)
+
+[Binary View]
+76543210
+-----------------
+01111110 - column 1 (hex: 0x7E)
+01111111 - column 2 (hex: 0x7F)
+00001001 - column 3 (hex: 0x09)
+00001001 - column 4 (hex: 0x09)
+00001001 - column 5 (hex: 0x09)
+01111111 - column 6 (hex: 0x7F)
+01111110 - column 7 (hex: 0x7E)
+00000000 - column 8 (hex: 0x00)
+
+1BPP Vertical 8x8 (d7)
+----------------------
+One byte = one column of pixels. (d7 = first pixel in column)
+
+[Binary View]
+76543210
+-----------------
+01111110 - column 1 (hex: 0x7E)
+11111110 - column 2 (hex: 0xFE)
+10010000 - column 3 (hex: 0x90)
+10010000 - column 4 (hex: 0x90)
+10010000 - column 5 (hex: 0x90)
+11111110 - column 6 (hex: 0xFE)
+01111110 - column 7 (hex: 0x7E)
+00000000 - column 8 (hex: 0x00)
+
+2BPP (NES/Famicom)
+------------------
+
+[Typical File Extensions]
+*.nes - iNES ROM image
+*.fds - Famicom Disk System image
+*.chr - external character file
+
+[Other Programs]
+Tile Molester: "2bpp planar, composite"
+YY-CHR.net:    "2BPP NES"
+
+[Binary View]
+Plane 1 is the first 8 bytes of a tile.
+Plane 2 is the second 8 bytes of a tile.
+All bytes of plane 1 are defined before plane 2.
+
+<Example "A", Color 1>
+Plane 1  | Plane 2
+76543210 | 76543210
+-------------------
+01111100 | 00000000 - row 1 (hex: 0x7C; 0x00)
+11000110 | 00000000 - row 2 (hex: 0xC6; 0x00)
+11000110 | 00000000 - row 3 (hex: 0xC6; 0x00)
+11111110 | 00000000 - row 4 (hex: 0xFE; 0x00)
+11000110 | 00000000 - row 5 (hex: 0xC6; 0x00)
+11000110 | 00000000 - row 6 (hex: 0xC6; 0x00)
+11000110 | 00000000 - row 7 (hex: 0xC6; 0x00)
+00000000 | 00000000 - row 8 (hex: 0x00; 0x00)
+
+Actual representation:
+7C C6 C6 FE C6 C6 C6 00 - first 8
+00 00 00 00 00 00 00 00 - second 8
+
+<Example "A", Color 2>
+Plane 1  | Plane 2
+76543210 | 76543210
+-------------------
+00000000 | 01111100 - row 1 (hex: 0x00; 0x7C)
+00000000 | 11000110 - row 2 (hex: 0x00; 0xC6)
+00000000 | 11000110 - row 3 (hex: 0x00; 0xC6)
+00000000 | 11111110 - row 4 (hex: 0x00; 0xFE)
+00000000 | 11000110 - row 5 (hex: 0x00; 0xC6)
+00000000 | 11000110 - row 6 (hex: 0x00; 0xC6)
+00000000 | 11000110 - row 7 (hex: 0x00; 0xC6)
+00000000 | 00000000 - row 8 (hex: 0x00; 0x00)
+
+Actual representation:
+00 00 00 00 00 00 00 00 - first 8
+7C C6 C6 FE C6 C6 C6 00 - second 8
+
+<Example "A", Color 3>
+Plane 1  | Plane 2
+76543210 | 76543210
+-------------------
+01111100 | 01111100 - row 1 (hex: 0x7C; 0x7C)
+11000110 | 11000110 - row 2 (hex: 0xC6; 0xC6)
+11000110 | 11000110 - row 3 (hex: 0xC6; 0xC6)
+11111110 | 11111110 - row 4 (hex: 0xFE; 0xFE)
+11000110 | 11000110 - row 5 (hex: 0xC6; 0xC6)
+11000110 | 11000110 - row 6 (hex: 0xC6; 0xC6)
+11000110 | 11000110 - row 7 (hex: 0xC6; 0xC6)
+00000000 | 00000000 - row 8 (hex: 0x00; 0x00)
+
+Actual representation:
+7C C6 C6 FE C6 C6 C6 00 - first 8
+7C C6 C6 FE C6 C6 C6 00 - second 8
+
+2BPP (Game Boy)
+---------------
+
+[Typical File Extensions]
+*.gb - Game Boy ROM image
+
+[Other Programs]
+Tile Molester: "2bpp planar"
+YY-CHR.net:    "2BPP GB"
+
+[Binary View]
+Plane 1 is the first byte of a row.
+Plane 2 is the second byte of a row.
+Each row's set of planes are consecutive.
+
+<Example "A", Color 1>
+Plane 1  | Plane 2
+76543210 | 76543210
+-------------------
+01111100 | 00000000 - row 1 (hex: 0x7C, 0x00)
+11000110 | 00000000 - row 2 (hex: 0xC6, 0x00)
+11000110 | 00000000 - row 3 (hex: 0xC6, 0x00)
+11111110 | 00000000 - row 4 (hex: 0xFE, 0x00)
+11000110 | 00000000 - row 5 (hex: 0xC6, 0x00)
+11000110 | 00000000 - row 6 (hex: 0xC6, 0x00)
+11000110 | 00000000 - row 7 (hex: 0xC6, 0x00)
+00000000 | 00000000 - row 8 (hex: 0x00, 0x00)
+
+Actual representation:
+7C 00 C6 00 C6 00 FE 00 C6 00 C6 00 C6 00 00 00
+
+<Example "A", Color 2>
+Plane 1  | Plane 2
+76543210 | 76543210
+-------------------
+00000000 | 01111100 - row 1 (hex: 0x00, 0x7C)
+00000000 | 11000110 - row 2 (hex: 0x00, 0xC6)
+00000000 | 11000110 - row 3 (hex: 0x00, 0xC6)
+00000000 | 11111110 - row 4 (hex: 0x00, 0xFE)
+00000000 | 11000110 - row 5 (hex: 0x00, 0xC6)
+00000000 | 11000110 - row 6 (hex: 0x00, 0xC6)
+00000000 | 11000110 - row 7 (hex: 0x00, 0xC6)
+00000000 | 00000000 - row 8 (hex: 0x00, 0x00)
+
+Actual representation:
+00 7C 00 C6 00 C6 00 FE 00 C6 00 C6 00 C6 00 00
+
+<Example "A", Color 3>
+Plane 1  | Plane 2
+76543210 | 76543210
+-------------------
+01111100 | 01111100 - row 1 (hex: 0x7C, 0x7C)
+11000110 | 11000110 - row 2 (hex: 0xC6, 0xC6)
+11000110 | 11000110 - row 3 (hex: 0xC6, 0xC6)
+11111110 | 11111110 - row 4 (hex: 0xFE, 0xFE)
+11000110 | 11000110 - row 5 (hex: 0xC6, 0xC6)
+11000110 | 11000110 - row 6 (hex: 0xC6, 0xC6)
+11000110 | 11000110 - row 7 (hex: 0xC6, 0xC6)
+00000000 | 00000000 - row 8 (hex: 0x00, 0x00)
+
+Actual representation:
+7C 7C C6 C6 C6 C6 FE FE C6 C6 C6 C6 C6 C6 00 00
+
+2BPP (MSX)
+----------
+
+[Other Programs]
+YY-CHR.net:    "2BPP MSX"
+
+2BPP (Neo-Geo Pocket)
+---------------------
+
+[Typical File Extensions]
+*.ngp  - Monochrome
+*.ngpc - Color
+
+[Other Programs]
+YY-CHR.net:    "2BPP NGP"
+
+2BPP (Virtual Boy)
+------------------
+
+[Other Programs]
+YY-CHR.net:    "2BPP VB"
+
+4BPP Planar (Sega Master System, Game Gear, Wonderswan)
+-------------------------------------------------------
+
+[Typical File Extensions]
+*.sms - Sega Master System
+*.gg  - Game Gear
+*.ws  - Wonderswan (monochrome)
+*.wsc - Wonderswan (color)
+
+[Other Programs]
+Tile Molester: "2bpp planar"
+YY-CHR.net:    "4BPP SMS/GG/WSC"
+
+3BPP (SNES)
+-----------
+
+[Other Programs]
+YY-CHR.net:    "3BPP SNES"
+
+4BPP (SNES)
+-----------
+
+[Other Programs]
+Tile Molester: "2bpp planar, composite (2x2bpp)"
+YY-CHR.net:    "4BPP SNES/CE(CG)"
+
+4BPP (PC Engine BG)
+-------------------
+
+[Other Programs]
+YY-CHR.net:    "4BPP SNES/CE(CG)"
+
+4BPP (GBA)
+----------
+
+[Other Programs]
+YY-CHR.net:    "4BPP GBA"
+
+4BPP (Neo-Geo Fix)
+------------------
+
+4BPP (MSX)
+----------
+
+[Other Programs]
+YY-CHR.net:    "4BPP MSX"
+
+4BPP (PC Engine SPR)
+--------------------
+
+[Other Programs]
+YY-CHR.net:    "4BPP PCE(SG)"

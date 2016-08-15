@@ -1,0 +1,12 @@
+Porno-Graphic Interface Notes
+=============================
+[Main Notes]
+"ui_example.png" is by Rotwang
+* Multi-document interface
+* Current layout mockup borrows heavily from TLP
+* Palette selector will be different from TLP's
+* MAME loader should be able to allow users to handle cases
+
+[etc]
+vs2010 image library:
+http://www.yilmazeroglu.com/download/

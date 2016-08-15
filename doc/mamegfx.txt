@@ -1,0 +1,86 @@
+How MAME decodes (some) graphics
+================================
+There are a set of macros and structures that MAME uses to decode graphics on
+most(?) platforms. The main files involved with this are digfx.cpp/digfx.h.
+drawgfx.cpp/drawgfx.h also contains useful things.
+
+src/emu/digfx.cpp
+src/emu/digfx.h
+
+src/emu/drawgfx.cpp
+src/emu/drawgfx.h
+
+src/emu/video/generic.cpp
+src/emu/video/generic.h
+
+aside from these 6 files, the gfx_layout structure is defined in 1,022 of MAME's
+source files as of 2016/02/06.
+
+================================================================================
+Elements
+================================================================================
+[gfx_layout]
+struct gfx_layout
+{
+	UINT32 xoffs(int x) const { return (extxoffs != nullptr) ? extxoffs[x] : xoffset[x]; }
+	UINT32 yoffs(int y) const { return (extyoffs != nullptr) ? extyoffs[y] : yoffset[y]; }
+
+	UINT16          width;              // pixel width of each element
+	UINT16          height;             // pixel height of each element
+	UINT32          total;              // total number of elements, or RGN_FRAC()
+	UINT16          planes;             // number of bitplanes
+	UINT32          planeoffset[MAX_GFX_PLANES]; // bit offset of each bitplane
+	UINT32          xoffset[MAX_GFX_SIZE]; // bit offset of each horizontal pixel
+	UINT32          yoffset[MAX_GFX_SIZE]; // bit offset of each vertical pixel
+	UINT32          charincrement;      // distance between two consecutive elements (in bits)
+	const UINT32 *  extxoffs;           // extended X offset array for really big layouts
+	const UINT32 *  extyoffs;           // extended Y offset array for really big layouts
+};
+
+[gfx_decode_entry]
+struct gfx_decode_entry
+{
+	const char *    memory_region;      // memory region where the data resides
+	UINT32          start;              // offset of beginning of data to decode
+	const gfx_layout *gfxlayout;        // pointer to gfx_layout describing the layout; NULL marks the end of the array
+	UINT16          color_codes_start;  // offset in the color lookup table where color codes start
+	UINT16          total_color_codes;  // total number of color codes
+	UINT32          flags;              // flags and optional scaling factors
+};
+
+[GFXDECODE_START]
+#define GFXDECODE_START( name ) const gfx_decode_entry GFXDECODE_NAME(name)[] = {
+
+[GFXDECODE_END]
+#define GFXDECODE_END { 0 } };
+
+[GFXDECODE_ENTRY]
+#define GFXDECODE_ENTRY(region,offset,layout,start,colors) { region, offset, &layout, start, colors, 0 },
+
+================================================================================
+Example (Arkanoid)
+================================================================================
+static const gfx_layout charlayout =
+{
+	8,8,    /* 8*8 characters */
+	4096,   /* 4096 characters */
+	3,  /* 3 bits per pixel */
+	{ 2*4096*8*8, 4096*8*8, 0 },    /* the two bitplanes are separated */
+	{ 0, 1, 2, 3, 4, 5, 6, 7 },
+	{ 0*8, 1*8, 2*8, 3*8, 4*8, 5*8, 6*8, 7*8 },
+	8*8 /* every char takes 8 consecutive bytes */
+};
+
+/* Graphics Decode Information */
+
+static GFXDECODE_START( arkanoid )
+	GFXDECODE_ENTRY( "gfx1", 0, charlayout,  0, 64 )
+	// sprites use the same characters above, but are 16x8
+GFXDECODE_END
+
+================================================================================
+specific instances that are nice to know about
+================================================================================
+src/mame/drivers/cps1.cpp    - Capcom CPS1
+src/mame/drivers/cps3.cpp    - Capcom CPS3
+src/mame/machine/megacd.cpp  - Sega CD (various 16x16 and 32x32 modes)
