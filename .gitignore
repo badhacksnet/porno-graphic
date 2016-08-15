@@ -1,0 +1,10 @@
+# visual studio user files
+# these are different per user so don't bother versioning them
+*.suo
+*.csproj.user
+
+# object files
+src/obj/*
+
+# files generated when building
+src/bin/*
