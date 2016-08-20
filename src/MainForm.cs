@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Text;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 
 namespace Porno_Graphic
 {
@@ -369,8 +371,6 @@ namespace Porno_Graphic
 				/* icon, caption */
 				a.Icon = Porno_Graphic.Properties.Resources.Document;
 				a.Text = String.Format("NewFile{0:d02}", NewFileCount);
-				/* todo: background color should probably match palette entry 0 */
-				a.BackColor = Color.Black;
 				a.Show();
 
 				/* increment counters */
@@ -566,7 +566,49 @@ namespace Porno_Graphic
 		private void MainForm_DragDrop(object sender, DragEventArgs e) {
 			/* dragging and dropping an item (e.g. a file) onto the main window */
 		}
-		#endregion
+        #endregion
 
-	}
+        private void menuItem_File_Import_Click(object sender, EventArgs e)
+        {
+            // TODO move this out to a different method
+            // TODO make this localisable
+
+            OpenFileDialog openProfileDialog = new OpenFileDialog();
+            openProfileDialog.Title = "Select Profile";
+            openProfileDialog.Filter = "Game Profiles (.profile)|*.profile|All Files (*.*)|*.*";
+            openProfileDialog.FilterIndex = 1;
+            openProfileDialog.Multiselect = false;
+            if (openProfileDialog.ShowDialog() != DialogResult.OK)
+                return;
+
+            StreamReader reader = null;
+            Classes.GameProfile profile = null;
+            try
+            {
+                reader = new StreamReader(openProfileDialog.FileName);
+                XmlSerializer profileLoader = new XmlSerializer(typeof(Classes.GameProfile));
+                profile = (Classes.GameProfile)profileLoader.Deserialize(reader);
+            }
+            catch
+            {
+            }
+            finally
+            {
+                if (reader != null)
+                    reader.Close();
+            }
+
+            if (profile == null)
+            {
+                // TODO more meaningful error message
+                MessageBox.Show("Error loading profile");
+                return;
+            }
+
+            TileImporter importer = new TileImporter();
+            importer.MdiParent = this;
+            importer.Profile = profile;
+            importer.Show();
+        }
+    }
 }

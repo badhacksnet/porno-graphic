@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="http://baddesthacks.net/porno-graphic/profile"
+    elementFormDefault="unqualified"
+    attributeFormDefault="unqualified"
+    xmlns="http://baddesthacks.net/porno-graphic/profile"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+  <xs:element name="profile" type="GameProfile" />
+
+  <xs:complexType name="Offset">
+    <xs:attribute name="bits" type="xs:unsignedInt" />
+    <xs:attribute name="fracnum" type="xs:unsignedInt" default="0" />
+    <xs:attribute name="fracden" default="1">
+      <xs:simpleType>
+        <xs:restriction base="xs:unsignedInt">
+          <xs:minInclusive value="1" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="OffsetList">
+    <xs:sequence>
+      <xs:element name="offset" type="Offset" minOccurs="1" maxOccurs="unbounded" />
+    </xs:sequence>
+    <xs:attribute name="multiplier" default="1">
+      <xs:simpleType>
+        <xs:restriction base="xs:unsignedInt">
+          <xs:minInclusive value="1" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="CharLayout">
+    <xs:sequence>
+      <xs:element name="plane" type="OffsetList" />
+      <xs:element name="x" type="OffsetList" />
+      <xs:element name="y" type="OffsetList" />
+      <xs:element name="stride">
+        <xs:simpleType>
+          <xs:restriction base="xs:unsignedInt">
+            <xs:minInclusive value="1" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" />
+  </xs:complexType>
+
+  <xs:complexType name="CharLayoutList">
+    <xs:sequence>
+      <xs:element name="layout" type="CharLayout" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="GameProfile">
+    <xs:sequence>
+      <xs:element name="layouts" type="CharLayoutList" />
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" />
+  </xs:complexType>
+</xs:schema>
