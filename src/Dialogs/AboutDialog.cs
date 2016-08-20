@@ -12,7 +12,7 @@ namespace Porno_Graphic
 		public AboutDialog() {
 			InitializeComponent();
 			this.Text = String.Format("About {0}", AssemblyTitle);
-			this.about_ProductLabel.Text = String.Format("{0} v{1} by el kadong and Rotwang", AssemblyProduct, AssemblyVersion);
+			this.about_ProductLabel.Text = String.Format("{0} v{1} by el kadong, Rotwang, and Man With Cat Ears", AssemblyProduct, AssemblyVersion);
 			this.about_CompanyLabel.Text = AssemblyCompany;
 			this.about_CopyrightLabel.Text = AssemblyCopyright;
 		}
