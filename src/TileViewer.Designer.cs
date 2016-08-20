@@ -33,6 +33,8 @@
             this.xFlip = new System.Windows.Forms.CheckBox();
             this.yFlip = new System.Windows.Forms.CheckBox();
             this.tileGrid = new Porno_Graphic.Classes.ElementGridView();
+            this.rotateLabel = new System.Windows.Forms.Label();
+            this.rotate = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.xScale)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.yScale)).BeginInit();
             this.SuspendLayout();
@@ -147,13 +149,40 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tileGrid.AutoScroll = true;
             this.tileGrid.AutoScrollMinSize = new System.Drawing.Size(622, 2);
+            this.tileGrid.Elements = new Porno_Graphic.Classes.GfxElement[0];
             this.tileGrid.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.tileGrid.HighlightColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(0)))));
             this.tileGrid.Location = new System.Drawing.Point(0, 0);
             this.tileGrid.Name = "tileGrid";
+            this.tileGrid.Palette = null;
             this.tileGrid.Size = new System.Drawing.Size(624, 329);
             this.tileGrid.TabIndex = 0;
             this.tileGrid.Tag = "";
+            // 
+            // rotateLabel
+            // 
+            this.rotateLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.rotateLabel.Location = new System.Drawing.Point(234, 351);
+            this.rotateLabel.Name = "rotateLabel";
+            this.rotateLabel.Size = new System.Drawing.Size(48, 13);
+            this.rotateLabel.TabIndex = 8;
+            this.rotateLabel.Text = "Rotate:";
+            // 
+            // rotate
+            // 
+            this.rotate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.rotate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.rotate.FormattingEnabled = true;
+            this.rotate.Items.AddRange(new object[] {
+            "0°",
+            "90°",
+            "180°",
+            "270°"});
+            this.rotate.Location = new System.Drawing.Point(288, 348);
+            this.rotate.Name = "rotate";
+            this.rotate.Size = new System.Drawing.Size(64, 21);
+            this.rotate.TabIndex = 9;
+            this.rotate.SelectedIndexChanged += new System.EventHandler(this.rotate_SelectedIndexChanged);
             // 
             // TileViewer
             // 
@@ -161,6 +190,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(624, 441);
+            this.Controls.Add(this.rotate);
+            this.Controls.Add(this.rotateLabel);
             this.Controls.Add(this.yFlip);
             this.Controls.Add(this.xFlip);
             this.Controls.Add(this.lockScale);
@@ -191,5 +222,7 @@
         private System.Windows.Forms.CheckBox lockScale;
         private System.Windows.Forms.CheckBox yFlip;
         private System.Windows.Forms.CheckBox xFlip;
+        private System.Windows.Forms.Label rotateLabel;
+        private System.Windows.Forms.ComboBox rotate;
     }
 }

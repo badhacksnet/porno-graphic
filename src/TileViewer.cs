@@ -34,6 +34,8 @@ namespace Porno_Graphic
 		public TileViewer() {
 			InitializeComponent();
 
+            rotate.SelectedIndex = 0;
+
 			/* initialize tile viewer variables */
 			ShowGrid = false; // xxx: should use current setting
 			IsDirty = false;
@@ -73,6 +75,11 @@ namespace Porno_Graphic
         private void yFlip_CheckedChanged(object sender, EventArgs e)
         {
             tileGrid.FlipY = yFlip.Checked;
+        }
+
+        private void rotate_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            tileGrid.Rotate = (uint)rotate.SelectedIndex;
         }
     }
 }

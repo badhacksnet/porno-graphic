@@ -16,6 +16,7 @@ namespace Porno_Graphic.Classes
 
         private uint mScaleX = 1U;
         private uint mScaleY = 1U;
+        private uint mRotate = 0U;
         private bool mFlipX = false;
         private bool mFlipY = false;
 
@@ -111,6 +112,23 @@ namespace Porno_Graphic.Classes
                 }
             }
         }
+        [DefaultValue(typeof(uint), "0")]
+        public uint Rotate
+        {
+            get
+            {
+                return mRotate;
+            }
+            set
+            {
+                if (value != mRotate)
+                {
+                    mRotate = value;
+                    RecomputeLayout();
+                    Invalidate();
+                }
+            }
+        }
         [DefaultValue(false)]
         public bool FlipX
         {
@@ -167,8 +185,8 @@ namespace Porno_Graphic.Classes
             }
         }
 
-        private uint ItemWidth { get { return (ScaleX * ElementWidth) + (2 * ElementPadding); } }
-        private uint ItemHeight { get { return (ScaleY * ElementHeight) + (2 * ElementPadding); } }
+        private uint ItemWidth { get { return (ScaleX * (((Rotate & 1U) != 0U) ? ElementHeight : ElementWidth)) + (2 * ElementPadding); } }
+        private uint ItemHeight { get { return (ScaleY * (((Rotate & 1U) != 0U) ? ElementWidth : ElementHeight)) + (2 * ElementPadding); } }
 
         public ElementGridView()
         {
@@ -192,11 +210,28 @@ namespace Porno_Graphic.Classes
             int lastColumn = (int)Math.Min((clip.Right - 1 - (2 * ElementPadding)) / ItemWidth, columns - 1);
             if (Palette != null)
             {
-                int[,] transform = new int[,] { { FlipX ? -(int)ScaleX : (int)ScaleX, 0, 0 }, { 0, FlipY ? -(int)ScaleY : (int)ScaleY, 0 }, { 0, 0, 1 } };
-                transform[1, 2] = (int)((ItemHeight * firstRow) + (2 * ElementPadding) + (FlipY ? ((ElementHeight * ScaleY) - 1) : 0));
+                bool swapAxes = (Rotate & 1U) != 0U;
+                bool reverseX = FlipX != (((Rotate + 1U) & 2U) != 0U);
+                bool reverseY = FlipY != ((Rotate & 2U) != 0U);
+                int[,] transform = new int[,] { { swapAxes ? 0 : 1, swapAxes ? 1 : 0, 0 }, { swapAxes ? 1 : 0, swapAxes ? 0 : 1, 0 }, { 0, 0, 1 } };
+                if (reverseX)
+                {
+                    transform[0, 0] = -transform[0, 0];
+                    transform[0, 1] = -transform[0, 1];
+                }
+                if (reverseY)
+                {
+                    transform[1, 0] = -transform[1, 0];
+                    transform[1, 1] = -transform[1, 1];
+                }
+                transform[0, 0] *= (int)ScaleX;
+                transform[0, 1] *= (int)ScaleX;
+                transform[1, 0] *= (int)ScaleY;
+                transform[1, 1] *= (int)ScaleY;
+                transform[1, 2] = (int)((ItemHeight * firstRow) + (2 * ElementPadding) + (reverseY ? (((swapAxes ? ElementWidth : ElementHeight) * ScaleY) - 1) : 0));
                 for (int row = firstRow; row <= lastRow; row++, transform[1, 2] += (int)ItemHeight)
                 {
-                    transform[0, 2] = (int)((ItemWidth * firstColumn) + (2 * ElementPadding) + (FlipX ? ((ElementWidth * ScaleX) - 1) : 0));
+                    transform[0, 2] = (int)((ItemWidth * firstColumn) + (2 * ElementPadding) + (reverseX ? (((swapAxes ? ElementHeight : ElementWidth) * ScaleX) - 1) : 0));
                     for (int column = firstColumn; (column <= lastColumn) && (((row * columns) + column) < Elements.Length); column++, transform[0, 2] += (int)ItemWidth)
                     {
                         GfxElement element = Elements[(row * columns) + column];
