@@ -59,7 +59,7 @@
 			this.about_OkButton.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.about_OkButton.Location = new System.Drawing.Point(9, 149);
 			this.about_OkButton.Name = "about_OkButton";
-			this.about_OkButton.Size = new System.Drawing.Size(416, 23);
+			this.about_OkButton.Size = new System.Drawing.Size(412, 23);
 			this.about_OkButton.TabIndex = 29;
 			this.about_OkButton.Text = "&OK whatever, get me back to the program";
 			// 
@@ -81,7 +81,7 @@
 			this.about_Picture.Image = global::Porno_Graphic.Properties.Resources.AboutPicture;
 			this.about_Picture.Location = new System.Drawing.Point(9, 9);
 			this.about_Picture.Name = "about_Picture";
-			this.about_Picture.Size = new System.Drawing.Size(416, 80);
+			this.about_Picture.Size = new System.Drawing.Size(412, 76);
 			this.about_Picture.TabIndex = 30;
 			this.about_Picture.TabStop = false;
 			// 
@@ -90,7 +90,7 @@
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.about_OkButton;
-			this.ClientSize = new System.Drawing.Size(434, 181);
+			this.ClientSize = new System.Drawing.Size(430, 181);
 			this.Controls.Add(this.about_CompanyLabel);
 			this.Controls.Add(this.about_Picture);
 			this.Controls.Add(this.about_ProductLabel);
