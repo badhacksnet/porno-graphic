@@ -429,5 +429,23 @@ namespace Porno_Graphic.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error reading file.
+        /// </summary>
+        internal static string TileImporter_ErrorReadingFile {
+            get {
+                return ResourceManager.GetString("TileImporter_ErrorReadingFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File is too small to load {0} element(s) from offset {1}.
+        /// </summary>
+        internal static string TileImporter_FileTooSmall {
+            get {
+                return ResourceManager.GetString("TileImporter_FileTooSmall", resourceCulture);
+            }
+        }
     }
 }

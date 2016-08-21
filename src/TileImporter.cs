@@ -82,7 +82,7 @@ namespace Porno_Graphic
             }
             catch
             {
-                MessageBox.Show("Error reading file");
+                MessageBox.Show(Porno_Graphic.Properties.Resources.TileImporter_ErrorReadingFile);
                 return;
             }
 
@@ -91,7 +91,7 @@ namespace Porno_Graphic
             Classes.CharLayout layout = Profile.CharLayouts[layoutBox.SelectedIndex];
             if (layout.MaxElements(data, offset) < count)
             {
-                MessageBox.Show(String.Format("File is too small to load {0} element(s) from offset {1}", countBox.Text, offsetBox.Text));
+                MessageBox.Show(String.Format(Porno_Graphic.Properties.Resources.TileImporter_FileTooSmall, countBox.Text, offsetBox.Text));
                 return;
             }
 

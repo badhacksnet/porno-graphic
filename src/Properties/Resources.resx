@@ -691,8 +691,13 @@
   <data name="selection" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\tools\selection.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ChooseColor" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\menu\ChooseColor.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TileImporter_ErrorReadingFile" xml:space="preserve">
+    <value>Error reading file</value>
+  </data>
+  <data name="TileImporter_FileTooSmall" xml:space="preserve">
+    <value>File is too small to load {0} element(s) from offset {1}</value>
   </data>
 </root>
