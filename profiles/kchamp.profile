@@ -47,14 +47,14 @@
         <offset bits="5" />
         <offset bits="6" />
         <offset bits="7" />
-		<offset bits="8192" />
-		<offset bits="8193" />
-		<offset bits="8194" />
-		<offset bits="8195" />
-		<offset bits="8196" />
-		<offset bits="8197" />
-		<offset bits="8198" />
-		<offset bits="8199" />
+		<offset bits="65536" />
+		<offset bits="65537" />
+		<offset bits="65538" />
+		<offset bits="65539" />
+		<offset bits="65540" />
+		<offset bits="65541" />
+		<offset bits="65542" />
+		<offset bits="65543" />
       </x>
       <y multiplier="8">
         <offset bits="0" />
