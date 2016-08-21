@@ -189,7 +189,7 @@
       <stride>1024</stride>
     </layout>
 
-    <layout name="Sprite (R-Shark)">
+    <layout name="Sprite (Super X/R-Shark/Pop Bingo)">
       <plane multiplier="1">
         <offset bits="0" />
         <offset bits="1" />
@@ -332,6 +332,82 @@
       </file>
     </region>
 
+    <region name="Char (Sadari/Gun Dealer 94/Primella)" length="20000">
+      <file name="gfx1">
+        <load offset="0" size="20000" />
+      </file>
+    </region>
+
+    <region name="Tile (small)" length="40000">
+      <file name="low" lanes="16/byte">
+        <load offset="00000" size="20000"/>
+      </file>
+      <file name="high" lanes="16/byte">
+        <load offset="00001" size="20000"/>
+      </file>
+    </region>
+
+    <region name="Tile (large)" length="80000">
+      <file name="low/low" lanes="16/byte">
+        <load offset="00000" size="20000"/>
+      </file>
+      <file name="low/high" lanes="16/byte">
+        <load offset="00001" size="20000"/>
+      </file>
+      <file name="high/low" lanes="16/byte">
+        <load offset="40000" size="20000"/>
+      </file>
+      <file name="high/high" lanes="16/byte">
+        <load offset="40001" size="20000"/>
+      </file>
+    </region>
+
+    <region name="Tile (Pollux/Blue Hawk/Flying Tiger, large)" length="80000">
+      <file name="gfx3/gfx4" lanes="16/word" byteswap="true">
+        <load offset="00000" size="80000" />
+      </file>
+    </region>
+
+    <region name="Tile (Pollux, small)" length="80000">
+      <file name="low" lanes="16/byte">
+        <load offset="00000" size="20000" />
+      </file>
+      <file name="high" lanes="16/byte">
+        <load offset="00001" size="20000" />
+      </file>
+      <fill offset="40000" size="40000" value="ff" />
+    </region>
+
+    <region name="Tile (Super X)" length="100000">
+      <file name="gfx2/gfx3" lanes="16/word" byteswap="true">
+        <load offset="00000" size="100000" />
+      </file>
+    </region>
+
+    <region name="Tile (R-Shark)" length="100000">
+      <file name="low" lanes="16/byte">
+        <load offset="00000" size="80000" />
+      </file>
+      <file name="high" lanes="16/byte">
+        <load offset="00001" size="80000" />
+      </file>
+    </region>
+
+    <region name="Tile (Pop Bingo)" length="200000">
+      <file name="9a" lanes="16/byte">
+        <load offset="000000" size="80000" />
+      </file>
+      <file name="9c" lanes="16/byte">
+        <load offset="000001" size="80000" />
+      </file>
+      <file name="9h" lanes="16/byte">
+        <load offset="100000" size="80000" />
+      </file>
+      <file name="9e" lanes="16/byte">
+        <load offset="100001" size="80000" />
+      </file>
+    </region>
+
     <region name="Sprite (The Last Day)" length="40000">
       <file name="d14" lanes="16/byte">
         <load offset="00000" size="20000" />
@@ -341,24 +417,54 @@
       </file>
     </region>
 
-    <region name="Sprite (Gulf Storm)" length="80000">
-      <file name="b1 low" lanes="16/byte">
+    <region name="Sprite (Gulf Storm/Flying Tiger)" length="80000">
+      <file name="b1/4h low" lanes="16/byte">
         <load offset="00000" size="20000" />
       </file>
-      <file name="c1 low" lanes="16/byte">
+      <file name="c1/2h low" lanes="16/byte">
         <load offset="00001" size="20000" />
       </file>
-      <file name="b1 high" lanes="16/byte">
+      <file name="b1/4k high" lanes="16/byte">
         <load offset="40000" size="20000" />
       </file>
-      <file name="e1 high" lanes="16/byte">
+      <file name="e1/2k high" lanes="16/byte">
         <load offset="40001" size="20000" />
       </file>
     </region>
 
-    <region name="Sprite (Pollux)" length="80000">
+    <region name="Sprite (Pollux/Blue Hawk)" length="80000">
       <file name="gfx2" lanes="16/word" byteswap="true">
         <load offset="00000" size="80000" />
+      </file>
+    </region>
+
+    <region name="Sprite (Super X)" length="200000">
+      <file name="gfx1" lanes="16/word" byteswap="true">
+        <load offset="000000" size="200000" />
+      </file>
+    </region>
+
+    <region name="Sprite (R-Shark)" length="200000">
+      <file name="rse4" lanes="16/byte">
+        <load offset="000000" size="80000" />
+      </file>
+      <file name="rse5" lanes="16/byte">
+        <load offset="000001" size="80000" />
+      </file>
+      <file name="rse6" lanes="16/byte">
+        <load offset="100000" size="80000" />
+      </file>
+      <file name="rse7" lanes="16/byte">
+        <load offset="100001" size="80000" />
+      </file>
+    </region>
+
+    <region name="Sprite (Pop Bingo)" length="100000">
+      <file name="9m" lanes="16/byte">
+        <load offset="000000" size="80000" />
+      </file>
+      <file name="9l" lanes="16/byte">
+        <load offset="000001" size="80000" />
       </file>
     </region>
   </regions>

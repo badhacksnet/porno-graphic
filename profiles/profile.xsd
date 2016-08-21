@@ -60,6 +60,12 @@
     </xs:restriction>
   </xs:simpleType>
 
+  <xs:simpleType name="FillValue">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[0-9a-fA-F]{1,2}" />
+    </xs:restriction>
+  </xs:simpleType>
+
   <xs:simpleType name="BusWidth">
     <xs:restriction base="xs:string">
       <xs:enumeration value="8" />
@@ -107,9 +113,18 @@
     <xs:attribute name="byteswap" type="xs:boolean" default="false" />
   </xs:complexType>
 
+  <xs:complexType name="LoadFill">
+    <xs:attribute name="offset" type="ByteAddress" use="required" />
+    <xs:attribute name="size" type="ByteAddress" use="required" />
+    <xs:attribute name="value" type="FillValue" use="required" />
+  </xs:complexType>
+
   <xs:complexType name="LoadRegion">
     <xs:sequence>
-      <xs:element name="file" type="LoadFile" minOccurs="1" maxOccurs="unbounded" />
+      <xs:choice minOccurs="1" maxOccurs="unbounded">
+        <xs:element name="file" type="LoadFile" />
+        <xs:element name="fill" type="LoadFill" />
+      </xs:choice>
     </xs:sequence>
     <xs:attribute name="name" type="xs:string" use="required" />
     <xs:attribute name="length" type="ByteAddress" use="required" />

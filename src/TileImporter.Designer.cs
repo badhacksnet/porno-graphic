@@ -164,7 +164,8 @@
             this.name.HeaderText = "Name";
             this.name.Name = "name";
             this.name.ReadOnly = true;
-            this.name.Width = 60;
+            this.name.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.name.Width = 41;
             // 
             // browse
             // 
@@ -182,6 +183,7 @@
             this.path.HeaderText = "File (path)";
             this.path.Name = "path";
             this.path.ReadOnly = true;
+            this.path.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // TileImporter
             // 

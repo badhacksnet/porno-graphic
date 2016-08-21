@@ -184,6 +184,39 @@ namespace Porno_Graphic.Classes
             }
         };
 
+        public class Fill
+        {
+            [XmlIgnore]
+            public uint Offset { get; set; }
+
+            [XmlIgnore]
+            public uint Size { get; set; }
+
+            [XmlIgnore]
+            public byte Value { get; set; }
+
+            [XmlAttribute("offset")]
+            public string SerializedOffset
+            {
+                get { return Offset.ToString("x"); }
+                set { Offset = uint.Parse(value, NumberStyles.HexNumber); }
+            }
+
+            [XmlAttribute("size")]
+            public string SerializedSize
+            {
+                get { return Size.ToString("x"); }
+                set { Size = uint.Parse(value, NumberStyles.HexNumber); }
+            }
+
+            [XmlAttribute("value")]
+            public string SerializedValue
+            {
+                get { return Value.ToString("x"); }
+                set { Size = byte.Parse(value, NumberStyles.HexNumber); }
+            }
+        };
+
         [XmlAttribute("name")]
         public String Name { get; set; }
 
@@ -192,6 +225,9 @@ namespace Porno_Graphic.Classes
 
         [XmlElement(ElementName = "file", Form = XmlSchemaForm.Unqualified)]
         public File[] Files { get; set; }
+
+        [XmlElement(ElementName = "fill", Form = XmlSchemaForm.Unqualified)]
+        public Fill[] Fills { get; set; }
 
         [XmlAttribute("length")]
         public string SerializedLength
@@ -223,6 +259,11 @@ namespace Porno_Graphic.Classes
                             destination += file.Skip;
                     }
                 }
+            }
+            foreach (Fill fill in Fills)
+            {
+                for (uint i = 0; i < fill.Size; i++)
+                    result[fill.Offset + i] = fill.Value;
             }
             return result;
         }
