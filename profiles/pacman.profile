@@ -76,18 +76,60 @@
 			</y>
 			<stride>512</stride>
 		</layout>
+
+		<layout name="Tiles (Crush 4)">
+			<plane multiplier="1">
+				<offset bits="0" fracnum="1" fracden="2"  />
+				<offset bits="4" fracnum="0" fracden="2"  />
+			</plane>
+			<x multiplier="1">
+				<offset bits="64" />
+				<offset bits="65" />
+				<offset bits="66" />
+				<offset bits="67" />
+				<offset bits="0" />
+				<offset bits="1" />
+				<offset bits="2" />
+				<offset bits="3" />
+			</x>
+			<y multiplier="8">
+				<offset bits="0" />
+				<offset bits="1" />
+				<offset bits="2" />
+				<offset bits="3" />
+				<offset bits="4" />
+				<offset bits="5" />
+				<offset bits="6" />
+				<offset bits="7" />
+			</y>
+			<stride>128</stride>
+		</layout>
 	</layouts>
+	<!-- todo: crush4_spritelayout -->
 
 	<regions>
-		<region name="Tiles" length="1000">
+		<region name="Tiles (Pac-Man)" length="1000">
 			<file name="5e">
 				<load offset="0" size="1000" />
 			</file>
 		</region>
 
-		<region name="Sprites" length="1000">
+		<region name="Sprites (Pac-Man)" length="1000">
 			<file name="5f">
 				<load offset="0" size="1000" />
+			</file>
+		</region>
+
+		<region name="Tiles (Crush 4)" length="4000">
+			<file name="crtwt.1">
+				<load offset="0000" size="800" />
+				<load offset="1000" size="800" />
+				<load offset="0800" size="800" />
+				<load offset="1800" size="800" />
+				<load offset="2000" size="800" />
+				<load offset="3000" size="800" />
+				<load offset="2800" size="800" />
+				<load offset="3800" size="800" />
 			</file>
 		</region>
 	</regions>
