@@ -212,6 +212,7 @@
 			this.Controls.Add(this.groupBox_Options);
 			this.Controls.Add(this.tileGrid);
 			this.ForeColor = System.Drawing.SystemColors.ControlText;
+			this.Icon = ((System.Drawing.Icon)(Porno_Graphic.Properties.Resources.Document));
 			this.MinimumSize = new System.Drawing.Size(320, 240);
 			this.Name = "TileViewer";
 			this.Text = "[Tile Viewer]";
