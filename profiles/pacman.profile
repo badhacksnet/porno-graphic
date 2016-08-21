@@ -32,6 +32,7 @@
 			</y>
 			<stride>128</stride>
 		</layout>
+
 		<layout name="Sprites">
 			<plane multiplier="1">
 				<offset bits="0" />
@@ -76,4 +77,18 @@
 			<stride>512</stride>
 		</layout>
 	</layouts>
+
+	<regions>
+		<region name="Tiles" length="1000">
+			<file name="5e">
+				<load offset="0" size="1000" />
+			</file>
+		</region>
+
+		<region name="Sprites" length="1000">
+			<file name="5f">
+				<load offset="0" size="1000" />
+			</file>
+		</region>
+	</regions>
 </profile:profile>
