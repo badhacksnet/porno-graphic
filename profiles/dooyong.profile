@@ -317,4 +317,49 @@
       <stride>4096</stride>
     </layout>
   </layouts>
+
+  <regions>
+    <region name="Char (The Last Day)" length="10000">
+      <file name="gfx1">
+        <load offset="8000" size="8000" />
+        <load offset="0000" size="8000" />
+      </file>
+    </region>
+
+    <region name="Char (Blue Hawk)" length="10000">
+      <file name="gfx1">
+        <load offset="0" size="10000" />
+      </file>
+    </region>
+
+    <region name="Sprite (The Last Day)" length="40000">
+      <file name="d14" lanes="16/byte">
+        <load offset="00000" size="20000" />
+      </file>
+      <file name="a14" lanes="16/byte">
+        <load offset="00001" size="20000" />
+      </file>
+    </region>
+
+    <region name="Sprite (Gulf Storm)" length="80000">
+      <file name="b1 low" lanes="16/byte">
+        <load offset="00000" size="20000" />
+      </file>
+      <file name="c1 low" lanes="16/byte">
+        <load offset="00001" size="20000" />
+      </file>
+      <file name="b1 high" lanes="16/byte">
+        <load offset="40000" size="20000" />
+      </file>
+      <file name="e1 high" lanes="16/byte">
+        <load offset="40001" size="20000" />
+      </file>
+    </region>
+
+    <region name="Sprite (Pollux)" length="80000">
+      <file name="gfx2" lanes="16/word" byteswap="true">
+        <load offset="00000" size="80000" />
+      </file>
+    </region>
+  </regions>
 </profile:profile>

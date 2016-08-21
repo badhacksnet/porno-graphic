@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Text;
 using System.Xml.Schema;
 using System.Xml.Serialization;
@@ -8,7 +7,7 @@ using System.Xml.Serialization;
 namespace Porno_Graphic.Classes
 {
     [Serializable()]
-    [XmlRoot("layout", Namespace = "http://baddesthacks.net/porno-graphic/profile")]
+    [XmlRoot(ElementName = "layout", Namespace = "http://baddesthacks.net/porno-graphic/profile")]
     public class CharLayout
     {
         [Serializable()]
@@ -18,11 +17,9 @@ namespace Porno_Graphic.Classes
             public uint Bits { get; set; }
 
             [XmlAttribute("fracnum")]
-            [DefaultValue(0U)]
             public uint FractionNumerator { get; set; }
 
             [XmlAttribute("fracden")]
-            [DefaultValue(1U)]
             public uint FractionDenominator { get; set; }
 
             public Offset()
@@ -36,7 +33,6 @@ namespace Porno_Graphic.Classes
         public class OffsetList
         {
             [XmlAttribute("multiplier")]
-            [DefaultValue(1U)]
             public uint Multiplier { get; set; }
 
             [XmlElement(ElementName = "offset", Form = XmlSchemaForm.Unqualified)]

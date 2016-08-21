@@ -22,7 +22,19 @@ namespace Porno_Graphic
             }
             set
             {
+                // TODO make this localisable
+
                 mProfile = value;
+
+                while (regionBox.Items.Count > 1)
+                    regionBox.Items.RemoveAt(regionBox.Items.Count - 1);
+                if ((mProfile != null) && (mProfile.LoadRegions != null))
+                {
+                    foreach (Classes.LoadRegion region in mProfile.LoadRegions)
+                        regionBox.Items.Add(string.Format("{0} (0x{1:x} bytes)", region.Name, region.Length));
+                }
+                regionBox.SelectedIndex = 0;
+
                 layoutBox.Items.Clear();
                 if (mProfile != null)
                 {
@@ -35,17 +47,6 @@ namespace Porno_Graphic
         public TileImporter()
         {
             InitializeComponent();
-        }
-
-        private void pathButton_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Filter = "All Files (*.*) | *.*";
-            dialog.FilterIndex = 1;
-            if (dialog.ShowDialog() == DialogResult.OK)
-            {
-                pathBox.Text = dialog.FileName;
-            }
         }
 
         private void layoutBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -78,7 +79,17 @@ namespace Porno_Graphic
             byte[] data = null;
             try
             {
-                data = File.ReadAllBytes(pathBox.Text);
+                if (regionBox.SelectedIndex == 0)
+                {
+                    data = File.ReadAllBytes((string)fileGrid.Rows[0].Cells[2].Value);
+                }
+                else
+                {
+                    string[] paths = new string[fileGrid.Rows.Count];
+                    for (int i = 0; i < paths.Length; i++)
+                        paths[i] = (string)fileGrid.Rows[i].Cells[2].Value;
+                    data = Profile.LoadRegions[regionBox.SelectedIndex - 1].LoadFiles(paths);
+                }
             }
             catch
             {
@@ -114,7 +125,15 @@ namespace Porno_Graphic
 
         private void EnableImportButton()
         {
-            importButton.Enabled = (pathBox.Text.Length > 0) && (layoutBox.SelectedItem != null) && IsValidNumber(offsetBox.Text) && IsValidNumber(countBox.Text);
+            foreach (DataGridViewRow row in fileGrid.Rows)
+            {
+                if (row.Cells[2].Value.Equals(""))
+                {
+                    importButton.Enabled = false;
+                    return;
+                }
+            }
+            importButton.Enabled = (layoutBox.SelectedItem != null) && IsValidNumber(offsetBox.Text) && IsValidNumber(countBox.Text);
         }
 
         private bool IsValidNumber(string text)
@@ -138,6 +157,47 @@ namespace Porno_Graphic
                 text = text.Substring(2);
             }
             return uint.Parse(text, style, CultureInfo.CurrentCulture);
+        }
+
+        private void regionBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // TODO make this localisable
+
+            fileGrid.Rows.Clear();
+            if (regionBox.SelectedIndex == 0)
+            {
+                int i = fileGrid.Rows.Add();
+                fileGrid.Rows[i].Cells[0].Value = "data";
+                fileGrid.Rows[i].Cells[2].Value = "";
+            }
+            else
+            {
+                foreach (Classes.LoadRegion.File file in Profile.LoadRegions[regionBox.SelectedIndex - 1].Files)
+                {
+                    int i = fileGrid.Rows.Add();
+                    fileGrid.Rows[i].Cells[0].Value = file.Name;
+                    fileGrid.Rows[i].Cells[2].Value = "";
+                }
+            }
+            EnableImportButton();
+        }
+
+        private void fileGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // TODO make this localisable
+
+            if ((fileGrid.Columns[e.ColumnIndex].Name == "browse") && (e.RowIndex >= 0))
+            {
+                OpenFileDialog dialog = new OpenFileDialog();
+                dialog.Title = string.Format("Select {0} file", fileGrid.Rows[e.RowIndex].Cells[0].Value);
+                dialog.Filter = "All Files (*.*) | *.*";
+                dialog.FilterIndex = 1;
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    fileGrid.Rows[e.RowIndex].Cells[2].Value = dialog.FileName;
+                    EnableImportButton();
+                }
+            }
         }
     }
 }

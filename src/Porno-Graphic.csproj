@@ -70,6 +70,7 @@
     <Compile Include="Classes\GfxElement.cs" />
     <Compile Include="Classes\IndexedPalette.cs" />
     <Compile Include="Classes\IPalette.cs" />
+    <Compile Include="Classes\LoadRegion.cs" />
     <Compile Include="Classes\PaletteData.cs" />
     <Compile Include="Classes\SolidPalette.cs" />
     <Compile Include="Dialogs\AboutDialog.cs">

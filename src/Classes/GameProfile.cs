@@ -16,5 +16,9 @@ namespace Porno_Graphic.Classes
         [XmlArray(ElementName = "layouts", Form = XmlSchemaForm.Unqualified)]
         [XmlArrayItem(ElementName = "layout", Form = XmlSchemaForm.Unqualified)]
         public CharLayout[] CharLayouts { get; set; }
+
+        [XmlArray(ElementName = "regions", Form = XmlSchemaForm.Unqualified)]
+        [XmlArrayItem(ElementName = "region", Form = XmlSchemaForm.Unqualified)]
+        public LoadRegion[] LoadRegions { get; set; }
     }
 }

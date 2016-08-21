@@ -7,8 +7,8 @@
 >
   <xs:element name="profile" type="GameProfile" />
 
-  <xs:complexType name="Offset">
-    <xs:attribute name="bits" type="xs:unsignedInt" />
+  <xs:complexType name="BitOffset">
+    <xs:attribute name="bits" type="xs:unsignedInt" default="0" />
     <xs:attribute name="fracnum" type="xs:unsignedInt" default="0" />
     <xs:attribute name="fracden" default="1">
       <xs:simpleType>
@@ -19,11 +19,11 @@
     </xs:attribute>
   </xs:complexType>
 
-  <xs:complexType name="OffsetList">
+  <xs:complexType name="BitOffsetList">
     <xs:sequence>
-      <xs:element name="offset" type="Offset" minOccurs="1" maxOccurs="unbounded" />
+      <xs:element name="offset" type="BitOffset" minOccurs="1" maxOccurs="unbounded" />
     </xs:sequence>
-    <xs:attribute name="multiplier" default="1">
+    <xs:attribute name="multiplier" default="1" use="optional">
       <xs:simpleType>
         <xs:restriction base="xs:unsignedInt">
           <xs:minInclusive value="1" />
@@ -34,9 +34,9 @@
 
   <xs:complexType name="CharLayout">
     <xs:sequence>
-      <xs:element name="plane" type="OffsetList" />
-      <xs:element name="x" type="OffsetList" />
-      <xs:element name="y" type="OffsetList" />
+      <xs:element name="plane" type="BitOffsetList" />
+      <xs:element name="x" type="BitOffsetList" />
+      <xs:element name="y" type="BitOffsetList" />
       <xs:element name="stride">
         <xs:simpleType>
           <xs:restriction base="xs:unsignedInt">
@@ -45,7 +45,7 @@
         </xs:simpleType>
       </xs:element>
     </xs:sequence>
-    <xs:attribute name="name" type="xs:string" />
+    <xs:attribute name="name" type="xs:string" use="required" />
   </xs:complexType>
 
   <xs:complexType name="CharLayoutList">
@@ -54,10 +54,78 @@
     </xs:sequence>
   </xs:complexType>
 
+  <xs:simpleType name="ByteAddress">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[0-9a-fA-F]{1,8}" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="BusWidth">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="8" />
+      <xs:enumeration value="16" />
+      <xs:enumeration value="32" />
+      <xs:enumeration value="64" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="IntegerSize">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="byte" />
+      <xs:enumeration value="word" />
+      <xs:enumeration value="dword" />
+      <xs:enumeration value="qword" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="Lanes">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="8/byte" />
+      <xs:enumeration value="16/byte" />
+      <xs:enumeration value="16/word" />
+      <xs:enumeration value="32/byte" />
+      <xs:enumeration value="32/word" />
+      <xs:enumeration value="32/dword" />
+      <xs:enumeration value="64/byte" />
+      <xs:enumeration value="64/word" />
+      <xs:enumeration value="64/dword" />
+      <xs:enumeration value="64/qword" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="LoadInstruction">
+    <xs:attribute name="offset" type="ByteAddress" use="required" />
+    <xs:attribute name="size" type="ByteAddress" use="required" />
+  </xs:complexType>
+
+  <xs:complexType name="LoadFile">
+    <xs:sequence>
+      <xs:element name="load" type="LoadInstruction" minOccurs="1" maxOccurs="unbounded" />
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" use="required" />
+    <xs:attribute name="lanes" type="Lanes" default="8/byte" />
+    <xs:attribute name="byteswap" type="xs:boolean" default="false" />
+  </xs:complexType>
+
+  <xs:complexType name="LoadRegion">
+    <xs:sequence>
+      <xs:element name="file" type="LoadFile" minOccurs="1" maxOccurs="unbounded" />
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" use="required" />
+    <xs:attribute name="length" type="ByteAddress" use="required" />
+  </xs:complexType>
+
+  <xs:complexType name="LoadRegionList">
+    <xs:sequence>
+      <xs:element name="region" type="LoadRegion" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
   <xs:complexType name="GameProfile">
     <xs:sequence>
       <xs:element name="layouts" type="CharLayoutList" />
+      <xs:element name="regions" type="LoadRegionList" minOccurs="0" maxOccurs="1" />
     </xs:sequence>
-    <xs:attribute name="name" type="xs:string" />
+    <xs:attribute name="name" type="xs:string" use="required" />
   </xs:complexType>
 </xs:schema>
