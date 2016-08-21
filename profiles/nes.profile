@@ -11,24 +11,24 @@
 				<offset bits="1" />
 			</plane>
 			<x multiplier="1">
-				<offset bits ="0" />
-				<offset bits ="1" />
-				<offset bits ="2" />
-				<offset bits ="3" />
-				<offset bits ="4" />
-				<offset bits ="5" />
-				<offset bits ="6" />
-				<offset bits ="7" />
+				<offset bits="0" />
+				<offset bits="1" />
+				<offset bits="2" />
+				<offset bits="3" />
+				<offset bits="4" />
+				<offset bits="5" />
+				<offset bits="6" />
+				<offset bits="7" />
 			</x>
 			<y multiplier="8">
-				<offset bits ="0" />
-				<offset bits ="1" />
-				<offset bits ="2" />
-				<offset bits ="3" />
-				<offset bits ="4" />
-				<offset bits ="5" />
-				<offset bits ="6" />
-				<offset bits ="7" />
+				<offset bits="0" />
+				<offset bits="1" />
+				<offset bits="2" />
+				<offset bits="3" />
+				<offset bits="4" />
+				<offset bits="5" />
+				<offset bits="6" />
+				<offset bits="7" />
 			</y>
 			<stride>128</stride>
 		</layout>
