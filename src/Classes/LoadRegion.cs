@@ -51,7 +51,7 @@ namespace Porno_Graphic.Classes
                 DWordWord,
                 [XmlEnum("32/dword")]
                 DWordDWord,
-                [XmlEnum("32/byte")]
+                [XmlEnum("64/byte")]
                 QWordByte,
                 [XmlEnum("64/word")]
                 QWordWord,
