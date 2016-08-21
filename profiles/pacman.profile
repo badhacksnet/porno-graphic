@@ -79,8 +79,8 @@
 
 		<layout name="Tiles (Crush 4)">
 			<plane multiplier="1">
-				<offset bits="0" fracnum="1" fracden="2"  />
-				<offset bits="4" fracnum="0" fracden="2"  />
+				<offset bits="0" fracnum="1" fracden="2" />
+				<offset bits="4" fracnum="0" fracden="2" />
 			</plane>
 			<x multiplier="1">
 				<offset bits="64" />
@@ -104,8 +104,51 @@
 			</y>
 			<stride>128</stride>
 		</layout>
+
+    <layout name="Sprites (Crush 4)">
+      <plane multiplier="1">
+        <offset bits="0" fracnum="1" fracden="2"  />
+        <offset bits="4" fracnum="0" fracden="2"  />
+      </plane>
+      <x multiplier="1">
+        <offset bits="64" />
+        <offset bits="65" />
+        <offset bits="66" />
+        <offset bits="67" />
+        <offset bits="128" />
+        <offset bits="129" />
+        <offset bits="130" />
+        <offset bits="131" />
+        <offset bits="192" />
+        <offset bits="193" />
+        <offset bits="194" />
+        <offset bits="195" />
+        <offset bits="0" />
+        <offset bits="1" />
+        <offset bits="2" />
+        <offset bits="3" />
+      </x>
+      <y multiplier="8">
+        <offset bits="0" />
+        <offset bits="1" />
+        <offset bits="2" />
+        <offset bits="3" />
+        <offset bits="4" />
+        <offset bits="5" />
+        <offset bits="6" />
+        <offset bits="7" />
+        <offset bits="32" />
+        <offset bits="33" />
+        <offset bits="34" />
+        <offset bits="35" />
+        <offset bits="36" />
+        <offset bits="37" />
+        <offset bits="38" />
+        <offset bits="39" />
+      </y>
+      <stride>512</stride>
+    </layout>
 	</layouts>
-	<!-- todo: crush4_spritelayout -->
 
 	<regions>
 		<region name="Tiles (Pac-Man)" length="1000">

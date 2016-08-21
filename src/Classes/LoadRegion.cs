@@ -260,10 +260,13 @@ namespace Porno_Graphic.Classes
                     }
                 }
             }
-            foreach (Fill fill in Fills)
+            if (Fills != null)
             {
-                for (uint i = 0; i < fill.Size; i++)
-                    result[fill.Offset + i] = fill.Value;
+                foreach (Fill fill in Fills)
+                {
+                    for (uint i = 0; i < fill.Size; i++)
+                        result[fill.Offset + i] = fill.Value;
+                }
             }
             return result;
         }
