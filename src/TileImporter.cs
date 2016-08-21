@@ -199,5 +199,31 @@ namespace Porno_Graphic
                 }
             }
         }
+
+        private void fileGrid_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop, false) && (((string[])e.Data.GetData(DataFormats.FileDrop)).Length == 1))
+                e.Effect = DragDropEffects.Link;
+            else
+                e.Effect = DragDropEffects.None;
+        }
+
+        private void fileGrid_DragDrop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop, false))
+            {
+                string[] paths = (string[])e.Data.GetData(DataFormats.FileDrop);
+                if (paths.Length == 1)
+                {
+                    Point cursorPosition = fileGrid.PointToClient(Cursor.Position);
+                    int row = fileGrid.HitTest(cursorPosition.X, cursorPosition.Y).RowIndex;
+                    if (row >= 0)
+                    {
+                        fileGrid.Rows[row].Cells[2].Value = paths[0];
+                        EnableImportButton();
+                    }
+                }
+            }
+        }
     }
 }

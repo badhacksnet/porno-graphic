@@ -119,6 +119,7 @@
             // 
             // fileGrid
             // 
+            this.fileGrid.AllowDrop = true;
             this.fileGrid.AllowUserToAddRows = false;
             this.fileGrid.AllowUserToDeleteRows = false;
             this.fileGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -135,6 +136,8 @@
             this.fileGrid.Size = new System.Drawing.Size(440, 173);
             this.fileGrid.TabIndex = 10;
             this.fileGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.fileGrid_CellContentClick);
+            this.fileGrid.DragDrop += new System.Windows.Forms.DragEventHandler(this.fileGrid_DragDrop);
+            this.fileGrid.DragEnter += new System.Windows.Forms.DragEventHandler(this.fileGrid_DragEnter);
             // 
             // regionLabel
             // 
