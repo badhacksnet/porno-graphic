@@ -26,6 +26,11 @@ namespace Porno_Graphic
 
                 mProfile = value;
 
+                if (mProfile != null)
+                    Text = string.Format("Import Tiles: {0}", mProfile.Name);
+                else
+                    Text = "Import Tiles";
+
                 while (regionBox.Items.Count > 1)
                     regionBox.Items.RemoveAt(regionBox.Items.Count - 1);
                 if ((mProfile != null) && (mProfile.LoadRegions != null))
