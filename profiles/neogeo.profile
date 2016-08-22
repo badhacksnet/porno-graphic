@@ -902,5 +902,92 @@
         <load offset="3000001" size="800000" />
       </file>
     </region>
+
+    <region name="40MB 16MB×2+2MB×4 bootleg (King of Fighters '97 Chongchu Jianghu Plus 2003)" length="2800000">
+      <file name="c1" lanes="16/byte">
+        <load offset="0000000" size="1000000" />
+      </file>
+      <file name="c2" lanes="16/byte">
+        <load offset="0000001" size="1000000" />
+      </file>
+      <file name="c51" lanes="16/byte">
+        <load offset="2000000" size="0200000" />
+      </file>
+      <file name="c61" lanes="16/byte">
+        <load offset="2000001" size="0200000" />
+      </file>
+      <file name="c52" lanes="16/byte">
+        <load offset="2400000" size="0200000" />
+      </file>
+      <file name="c62" lanes="16/byte">
+        <load offset="2400001" size="0200000" />
+      </file>
+    </region>
+
+    <region name="64MB 4MB×16 bootleg (King of Fighters 10th Anniversary)" length="4000000">
+      <file name="c1a" lanes="16/byte">
+        <load offset="0000000" size="400000" />
+      </file>
+      <file name="c2a" lanes="16/byte">
+        <load offset="0000001" size="400000" />
+      </file>
+      <file name="c1b" lanes="16/byte">
+        <load offset="0800000" size="400000" />
+      </file>
+      <file name="c2b" lanes="16/byte">
+        <load offset="0800001" size="400000" />
+      </file>
+      <file name="c3a" lanes="16/byte">
+        <load offset="1000000" size="400000" />
+      </file>
+      <file name="c4a" lanes="16/byte">
+        <load offset="1000001" size="400000" />
+      </file>
+      <file name="c3b" lanes="16/byte">
+        <load offset="1800000" size="400000" />
+      </file>
+      <file name="c4b" lanes="16/byte">
+        <load offset="1800001" size="400000" />
+      </file>
+      <file name="c5a" lanes="16/byte">
+        <load offset="2000000" size="400000" />
+      </file>
+      <file name="c6a" lanes="16/byte">
+        <load offset="2000001" size="400000" />
+      </file>
+      <file name="c5b" lanes="16/byte">
+        <load offset="2800000" size="400000" />
+      </file>
+      <file name="c6b" lanes="16/byte">
+        <load offset="2800001" size="400000" />
+      </file>
+      <file name="c7a" lanes="16/byte">
+        <load offset="3000000" size="400000" />
+      </file>
+      <file name="c8a" lanes="16/byte">
+        <load offset="3000001" size="400000" />
+      </file>
+      <file name="c7b" lanes="16/byte">
+        <load offset="3800000" size="400000" />
+      </file>
+      <file name="c8b" lanes="16/byte">
+        <load offset="3800001" size="400000" />
+      </file>
+    </region>
+
+    <region name="64MB 16MB×4 bootleg (Garou/Samurai Shodown V)" length="4000000">
+      <file name="c1" lanes="16/byte">
+        <load offset="0000000" size="1000000" />
+      </file>
+      <file name="c2" lanes="16/byte">
+        <load offset="0000001" size="1000000" />
+      </file>
+      <file name="c3" lanes="16/byte">
+        <load offset="2000000" size="1000000" />
+      </file>
+      <file name="c4" lanes="16/byte">
+        <load offset="2000001" size="1000000" />
+      </file>
+    </region>
   </regions>
 </profile:profile>
