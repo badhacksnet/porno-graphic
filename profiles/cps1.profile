@@ -697,6 +697,423 @@
         <load offset="200007" size="20000" />
       </file>
     </region>
-
+	<region name = "Final Fight/1941/Mercs 89624B-3 (World and USA)" length="200000">
+	  <file name="7a" lanes="64/word">
+        <load offset="000000" size="80000" />
+     </file>
+	 <file name="9a" lanes="64/word">
+        <load offset="000002" size="80000" />
+     </file>
+	 <file name="3a" lanes="64/word">
+        <load offset="000004" size="80000" />
+     </file>
+	 <file name="5a" lanes="64/word">
+        <load offset="000006" size="80000" />
+     </file>
+	</region>
+		<region name = "Final Fight/1941/Mercs 88622B-3/89625B-1 (Japan)" length="200000">
+	  <file name="4b" lanes="64/byte">
+        <load offset="000000" size="20000" />
+     </file>
+	 <file name="4a" lanes="64/byte">
+        <load offset="000001" size="20000" />
+     </file>
+	 <file name="9b" lanes="64/byte">
+        <load offset="000002" size="20000" />
+     </file>
+	 <file name="9a" lanes="64/byte">
+        <load offset="000003" size="20000" />
+     </file>
+	 <file name="5e" lanes="64/byte">
+        <load offset="000004" size="20000" />
+     </file>
+	 <file name="5c" lanes="64/byte">
+        <load offset="000005" size="20000" />
+     </file>
+	 <file name="8h" lanes="64/byte">
+        <load offset="000006" size="20000" />
+     </file>
+	 <file name="8f" lanes="64/byte">
+        <load offset="000007" size="20000" />
+     </file>
+	 <file name="5b" lanes="64/byte">
+        <load offset="100000" size="20000" />
+     </file>
+	 <file name="5a" lanes="64/byte">
+        <load offset="100001" size="20000" />
+     </file>
+	 <file name="10b" lanes="64/byte">
+        <load offset="100002" size="20000" />
+     </file>
+	 <file name="10a" lanes="64/byte">
+        <load offset="100003" size="20000" />
+     </file>
+	 <file name="7e" lanes="64/byte">
+        <load offset="100004" size="20000" />
+     </file>
+	 <file name="7c" lanes="64/byte">
+        <load offset="100005" size="20000" />
+     </file>
+	 <file name="9h" lanes="64/byte">
+        <load offset="100006" size="20000" />
+     </file>
+	 <file name="9f" lanes="64/byte">
+        <load offset="100007" size="20000" />
+     </file>
+	</region>
+	<region name = "Final Fight 91634B-2 (Japan Hack)" length="200000">
+	  <file name="3a" lanes="64/word">
+        <load offset="000000" size="80000" />
+     </file>
+	 <file name="4a" lanes="64/word">
+        <load offset="000002" size="80000" />
+     </file>
+	 <file name="5a" lanes="64/word">
+        <load offset="000004" size="80000" />
+     </file>
+	 <file name="6a" lanes="64/word">
+        <load offset="000006" size="80000" />
+     </file>
+	</region>
+	<region name = "Street Fighter II 90629B (World/USA)" length="900000">
+	 <file name="4a" lanes="64/word">
+	  <load offset="000000" size="80000" />
+	 </file>
+	 <file name="6a" lanes="64/word">
+	  <load offset="000002" size="80000" />
+	 </file>
+	 <file name="3a" lanes="64/word">
+	  <load offset="000004" size="80000" />
+	 </file>
+	 <file name="5a" lanes="64/word">
+	  <load offset="000006" size="80000" />
+	 </file>
+	 <file name="4c" lanes="64/word">
+	  <load offset="200000" size="80000" />
+	 </file>
+	 <file name="6c" lanes="64/word">
+	  <load offset="200002" size="80000" />
+	 </file>
+	 <file name="3c" lanes="64/word">
+	  <load offset="200004" size="80000" />
+	 </file>
+	 <file name="5c" lanes="64/word">
+	  <load offset="200006" size="80000" />
+	 </file>
+	 <file name="4d" lanes="64/word">
+	  <load offset="400000" size="80000" />
+	 </file>
+	 <file name="6d" lanes="64/word">
+	  <load offset="400002" size="80000" />
+	 </file>
+	 <file name="3d" lanes="64/word">
+	  <load offset="400004" size="80000" />
+	 </file>
+	 <file name="5d" lanes="64/word">
+	  <load offset="400006" size="80000" />
+	 </file>
+	</region>
+	<region name = "Street Fighter II 90629B (Japan)" length="900000">
+	 <file name="8a" lanes="64/word">
+	  <load offset="000000" size="80000" />
+	 </file>
+	 <file name="10a" lanes="64/word">
+	  <load offset="000002" size="80000" />
+	 </file>
+	 <file name="7a" lanes="64/word">
+	  <load offset="000004" size="80000" />
+	 </file>
+	 <file name="9a" lanes="64/word">
+	  <load offset="000006" size="80000" />
+	 </file>
+	 <file name="8c" lanes="64/word">
+	  <load offset="200000" size="80000" />
+	 </file>
+	 <file name="10c" lanes="64/word">
+	  <load offset="200002" size="80000" />
+	 </file>
+	 <file name="7c" lanes="64/word">
+	  <load offset="200004" size="80000" />
+	 </file>
+	 <file name="9c" lanes="64/word">
+	  <load offset="200006" size="80000" />
+	 </file>
+	 <file name="8d" lanes="64/word">
+	  <load offset="400000" size="80000" />
+	 </file>
+	 <file name="10d" lanes="64/word">
+	  <load offset="400002" size="80000" />
+	 </file>
+	 <file name="7d" lanes="64/word">
+	  <load offset="400004" size="80000" />
+	 </file>
+	 <file name="9d" lanes="64/word">
+	  <load offset="400006" size="80000" />
+	 </file>
+	</region>
+	<region name = "Knights of the Round 91635B-2 (World, USA)" length="400000">
+	 <file name="3a" lanes="64/word">
+	  <load offset="000000" size="80000" />
+	 </file>
+	 <file name="5a" lanes="64/word">
+	  <load offset="000002" size="80000" />
+	 </file>
+	 <file name="4a" lanes="64/word">
+	  <load offset="000004" size="80000" />
+	 </file>
+	 <file name="6a" lanes="64/word">
+	  <load offset="000006" size="80000" />
+	 </file>
+	 <file name="7a" lanes="64/word">
+	  <load offset="200000" size="80000" />
+	 </file>
+	 <file name="9a" lanes="64/word">
+	  <load offset="200002" size="80000" />
+	 </file>
+	 <file name="8a" lanes="64/word">
+	  <load offset="200004" size="80000" />
+	 </file>
+	 <file name="10a" lanes="64/word">
+	  <load offset="200006" size="80000" />
+	 </file>
+	</region>
+	<region name = "Knights of the Round 91634-2 (Japan)" length="400000">
+	 <file name="3a" lanes="64/word">
+	  <load offset="000000" size="80000" />
+	 </file>
+	 <file name="4a" lanes="64/word">
+	  <load offset="000002" size="80000" />
+	 </file>
+	 <file name="5a" lanes="64/word">
+	  <load offset="000004" size="80000" />
+	 </file>
+	 <file name="6a" lanes="64/word">
+	  <load offset="000006" size="80000" />
+	 </file>
+	 <file name="7a" lanes="64/word">
+	  <load offset="200000" size="80000" />
+	 </file>
+	 <file name="8a" lanes="64/word">
+	  <load offset="200002" size="80000" />
+	 </file>
+	 <file name="9a" lanes="64/word">
+	  <load offset="200004" size="80000" />
+	 </file>
+	 <file name="10a" lanes="64/word">
+	  <load offset="200006" size="80000" />
+	 </file>
+	</region>
+	<region name = "Knights of the Round 89625B-1 (Japan)" length="400000">
+	 <file name="4b" lanes="64/byte">
+	  <load offset="000000" size="20000" />
+	 </file>
+	 <file name="4a" lanes="64/byte">
+	  <load offset="000001" size="20000" />
+	 </file>
+	 <file name="9b" lanes="64/byte">
+	  <load offset="000002" size="20000" />
+	 </file>
+	 <file name="9a" lanes="64/byte">
+	  <load offset="000003" size="20000" />
+	 </file>
+	 <file name="5e" lanes="64/byte">
+	  <load offset="000004" size="20000" />
+	 </file>
+	 <file name="5c" lanes="64/byte">
+	  <load offset="000005" size="20000" />
+	 </file>
+	 <file name="8h" lanes="64/byte">
+	  <load offset="000006" size="20000" />
+	 </file>
+	 <file name="8f" lanes="64/byte">
+	  <load offset="000007" size="20000" />
+	 </file>
+	 <file name="5b" lanes="64/byte">
+	  <load offset="100000" size="20000" />
+	 </file>
+	 <file name="5a" lanes="64/byte">
+	  <load offset="100001" size="20000" />
+	 </file>
+	 <file name="10b" lanes="64/byte">
+	  <load offset="100002" size="20000" />
+	 </file>
+	 <file name="10a" lanes="64/byte">
+	  <load offset="100003" size="20000" />
+	 </file>
+	 <file name="7e" lanes="64/byte">
+	  <load offset="100004" size="20000" />
+	 </file>
+	 <file name="7c" lanes="64/byte">
+	  <load offset="100005" size="20000" />
+	 </file>
+	 <file name="9h" lanes="64/byte">
+	  <load offset="100006" size="20000" />
+	 </file>
+	 <file name="9f" lanes="64/byte">
+	  <load offset="100007" size="20000" />
+	 </file>
+	 <file name="7b" lanes="64/byte">
+	  <load offset="200000" size="20000" />
+	 </file>
+	 <file name="7a" lanes="64/byte">
+	  <load offset="200001" size="20000" />
+	 </file>
+	 <file name="11b" lanes="64/byte">
+	  <load offset="200002" size="20000" />
+	 </file>
+	 <file name="11a" lanes="64/byte">
+	  <load offset="200003" size="20000" />
+	 </file>
+	 <file name="8e" lanes="64/byte">
+	  <load offset="200004" size="20000" />
+	 </file>
+	 <file name="8c" lanes="64/byte">
+	  <load offset="200005" size="20000" />
+	 </file>
+	 <file name="10e" lanes="64/byte">
+	  <load offset="200006" size="20000" />
+	 </file>
+	 <file name="10c" lanes="64/byte">
+	  <load offset="200007" size="20000" />
+	 </file>
+	 <file name="8b" lanes="64/byte">
+	  <load offset="300000" size="20000" />
+	 </file>
+	 <file name="8a" lanes="64/byte">
+	  <load offset="300001" size="20000" />
+	 </file>
+	 <file name="12b" lanes="64/byte">
+	  <load offset="300002" size="20000" />
+	 </file>
+	 <file name="12a" lanes="64/byte">
+	  <load offset="300003" size="20000" />
+	 </file>
+	 <file name="9e" lanes="64/byte">
+	  <load offset="300004" size="20000" />
+	 </file>
+	 <file name="9c" lanes="64/byte">
+	  <load offset="300005" size="20000" />
+	 </file>
+	 <file name="11e" lanes="64/byte">
+	  <load offset="300006" size="20000" />
+	 </file>
+	 <file name="11c" lanes="64/byte">
+	  <load offset="300007" size="20000" />
+	 </file>
+	</region>
+	<region name = "Street Fighter II Champion Edition 91635B-2 (World/USA)" length="900000">
+	 <file name="3a" lanes="64/word">
+	  <load offset="000000" size="80000" />
+	 </file>
+	 <file name="5a" lanes="64/word">
+	  <load offset="000002" size="80000" />
+	 </file>
+	 <file name="4a" lanes="64/word">
+	  <load offset="000004" size="80000" />
+	 </file>
+	 <file name="6a" lanes="64/word">
+	  <load offset="000006" size="80000" />
+	 </file>
+	 <file name="7a" lanes="64/word">
+	  <load offset="200000" size="80000" />
+	 </file>
+	 <file name="9a" lanes="64/word">
+	  <load offset="200002" size="80000" />
+	 </file>
+	 <file name="8a" lanes="64/word">
+	  <load offset="200004" size="80000" />
+	 </file>
+	 <file name="10a" lanes="64/word">
+	  <load offset="200006" size="80000" />
+	 </file>
+	 <file name="3c" lanes="64/word">
+	  <load offset="400000" size="80000" />
+	 </file>
+	 <file name="5c" lanes="64/word">
+	  <load offset="400002" size="80000" />
+	 </file>
+	 <file name="4c" lanes="64/word">
+	  <load offset="400004" size="80000" />
+	 </file>
+	 <file name="6c" lanes="64/word">
+	  <load offset="400006" size="80000" />
+	 </file>
+	</region>
+	<region name = "Street Fighter II Champion Edition 91634B-2 (Japan)" length="900000">
+	 <file name="3a" lanes="64/word">
+	  <load offset="000000" size="80000" />
+	 </file>
+	 <file name="4a" lanes="64/word">
+	  <load offset="000002" size="80000" />
+	 </file>
+	 <file name="5a" lanes="64/word">
+	  <load offset="000004" size="80000" />
+	 </file>
+	 <file name="6a" lanes="64/word">
+	  <load offset="000006" size="80000" />
+	 </file>
+	 <file name="7a" lanes="64/word">
+	  <load offset="200000" size="80000" />
+	 </file>
+	 <file name="8a" lanes="64/word">
+	  <load offset="200002" size="80000" />
+	 </file>
+	 <file name="9a" lanes="64/word">
+	  <load offset="200004" size="80000" />
+	 </file>
+	 <file name="10a" lanes="64/word">
+	  <load offset="200006" size="80000" />
+	 </file>
+	 <file name="3c" lanes="64/word">
+	  <load offset="400000" size="80000" />
+	 </file>
+	 <file name="4c" lanes="64/word">
+	  <load offset="400002" size="80000" />
+	 </file>
+	 <file name="5c" lanes="64/word">
+	  <load offset="400004" size="80000" />
+	 </file>
+	 <file name="6c" lanes="64/word">
+	  <load offset="400006" size="80000" />
+	 </file>
+	</region>
+	<region name = "Street Fighter II Champion Edition (Rainbow & Derivative Hacks)" length="900000">
+	 <file name="s92_01" lanes="64/word">
+	  <load offset="000000" size="80000" />
+	 </file>
+	 <file name="s92_02" lanes="64/word">
+	  <load offset="000002" size="80000" />
+	 </file>
+	 <file name="s92_03" lanes="64/word">
+	  <load offset="000004" size="80000" />
+	 </file>
+	 <file name="s92_04" lanes="64/word">
+	  <load offset="000006" size="80000" />
+	 </file>
+	 <file name="s92_05" lanes="64/word">
+	  <load offset="200000" size="80000" />
+	 </file>
+	 <file name="s92_06" lanes="64/word">
+	  <load offset="200002" size="80000" />
+	 </file>
+	 <file name="s92_07" lanes="64/word">
+	  <load offset="200004" size="80000" />
+	 </file>
+	 <file name="s92_08" lanes="64/word">
+	  <load offset="200006" size="80000" />
+	 </file>
+	 <file name="s92_10" lanes="64/word">
+	  <load offset="400000" size="80000" />
+	 </file>
+	 <file name="s92_11" lanes="64/word">
+	  <load offset="400002" size="80000" />
+	 </file>
+	 <file name="s92_12" lanes="64/word">
+	  <load offset="400004" size="80000" />
+	 </file>
+	 <file name="s92_13" lanes="64/word">
+	  <load offset="400006" size="80000" />
+	 </file>
+	</region>
   </regions>
 </profile:profile>
