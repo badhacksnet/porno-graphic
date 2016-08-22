@@ -5,7 +5,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 >
 <layouts>
-	<layout name="1bpp">
+	<layout name="8x8 1bpp">
 		<plane multiplier="1">
 			<offset bits="0" />
 		</plane>
@@ -33,7 +33,7 @@
 	</layout>
 
 	<!-- not exactly perfect? tested against blueprnt/bg-1.3c -->
-	<layout name="2bpp planar">
+	<layout name="8x8 2bpp planar">
 		<plane multiplier="8">
 			<offset bits="0" fracnum="1" fracden="2" />
 			<offset bits="1" fracnum="0" fracden="2" />
