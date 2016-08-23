@@ -80,6 +80,52 @@
       </y>
       <stride>1024</stride>
     </layout>
+
+    <layout name="Neo Geo CD .SPR Sprite">
+      <plane multiplier="8">
+        <offset bits="1" />
+        <offset bits="3" />
+        <offset bits="0" />
+        <offset bits="2" />
+      </plane>
+      <x multiplier="1">
+        <offset bits="519" />
+        <offset bits="518" />
+        <offset bits="517" />
+        <offset bits="516" />
+        <offset bits="515" />
+        <offset bits="514" />
+        <offset bits="513" />
+        <offset bits="512" />
+        <offset bits="7" />
+        <offset bits="6" />
+        <offset bits="5" />
+        <offset bits="4" />
+        <offset bits="3" />
+        <offset bits="2" />
+        <offset bits="1" />
+        <offset bits="0" />
+      </x>
+      <y multiplier="32">
+        <offset bits="0" />
+        <offset bits="1" />
+        <offset bits="2" />
+        <offset bits="3" />
+        <offset bits="4" />
+        <offset bits="5" />
+        <offset bits="6" />
+        <offset bits="7" />
+        <offset bits="8" />
+        <offset bits="9" />
+        <offset bits="10" />
+        <offset bits="11" />
+        <offset bits="12" />
+        <offset bits="13" />
+        <offset bits="14" />
+        <offset bits="15" />
+      </y>
+      <stride>1024</stride>
+    </layout>
   </layouts>
 
   <regions>
