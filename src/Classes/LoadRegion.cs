@@ -221,7 +221,7 @@ namespace Porno_Graphic.Classes
             public string SerializedValue
             {
                 get { return Value.ToString("x2"); }
-                set { Size = byte.Parse(value, NumberStyles.HexNumber); }
+                set { Value = byte.Parse(value, NumberStyles.HexNumber); }
             }
         };
 
