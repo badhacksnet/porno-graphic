@@ -148,7 +148,7 @@
     <value>..\Resources\kyoling.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
     <comment>a kyoling, used as the About menu item</comment>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="kyoling_ico" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAUAEBACAAEAAQCwAAAAVgAAABAQEAABAAQAKAEAAAYBAAAQEAAAAQAIAGgFAAAuAgAAEBAAAAEA
@@ -697,8 +697,8 @@
   <data name="TileImporter_ErrorReadingFile" xml:space="preserve">
     <value>Error reading file</value>
   </data>
-  <data name="TileImporter_FileTooSmall" xml:space="preserve">
-    <value>File is too small to load {0} element(s) from offset {1}</value>
+  <data name="TileImporter_ErrorMessage_FileTooSmall" xml:space="preserve">
+    <value>File is too small to load {0} element(s) from offset {1} (can only load {3} element(s) from offset {1} of 0x{2:x}-byte file using selected layout).</value>
   </data>
   <data name="TileImporter_ErrorMessage_FillBeyondRegionEnd" xml:space="preserve">
     <value>Error loading region {0}: attempt to fill offset 0x{2:x} which is beyond region length 0x{1:x} with value 0x{3:x2}. Please check the fill instructions in the selected profile.</value>
@@ -718,10 +718,34 @@
   <data name="TileImporter_ErrorTitle_ReadPastFileEnd" xml:space="preserve">
     <value>Error: read past end of file</value>
   </data>
-  <data name="TileImporter_ImportTiles" xml:space="preserve">
+  <data name="TileImporter_UnpopulatedTitle" xml:space="preserve">
     <value>Import Tiles</value>
   </data>
-  <data name="TileImporter_ImportTilesProfile" xml:space="preserve">
+  <data name="TileImporter_PopulatedTitle" xml:space="preserve">
     <value>Import Tiles: {0}</value>
+  </data>
+  <data name="TileImporter_ErrorMessage_RegionTooSmall" xml:space="preserve">
+    <value>Region {0} is too small to load {2} element(s) from offset {3} (can only load {4} element(s) from offset {3} of 0x{1:x}-byte region using selected layout).</value>
+  </data>
+  <data name="TileImporter_ErrorTitle_FileTooSmall" xml:space="preserve">
+    <value>File too small for offset/count</value>
+  </data>
+  <data name="TileImporter_ErrorTitle_RegionTooSmall" xml:space="preserve">
+    <value>Region too small for offset/count</value>
+  </data>
+  <data name="TileImporter_FlatFileDisplayName" xml:space="preserve">
+    <value>data</value>
+  </data>
+  <data name="TileImporter_LayoutDisplayFormat" xml:space="preserve">
+    <value>{0} ({1}×{2}×{3})</value>
+  </data>
+  <data name="TileImporter_OpenDataFileFilter" xml:space="preserve">
+    <value>All Files (*.*) | *.*</value>
+  </data>
+  <data name="TileImporter_OpenDataFileTitle" xml:space="preserve">
+    <value>Select {0} file</value>
+  </data>
+  <data name="TileImporter_RegionDisplayFormat" xml:space="preserve">
+    <value>{0} (0x{1:x} bytes)</value>
   </data>
 </root>

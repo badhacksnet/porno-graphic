@@ -33,15 +33,21 @@
             this.offsetBox = new System.Windows.Forms.TextBox();
             this.offsetLabel = new System.Windows.Forms.Label();
             this.countBox = new System.Windows.Forms.TextBox();
-            this.countLabel = new System.Windows.Forms.Label();
             this.importButton = new System.Windows.Forms.Button();
             this.fileGrid = new System.Windows.Forms.DataGridView();
-            this.regionLabel = new System.Windows.Forms.Label();
-            this.regionBox = new System.Windows.Forms.ComboBox();
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.browse = new System.Windows.Forms.DataGridViewButtonColumn();
             this.path = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.regionLabel = new System.Windows.Forms.Label();
+            this.regionBox = new System.Windows.Forms.ComboBox();
+            this.countButton = new System.Windows.Forms.RadioButton();
+            this.fractionButton = new System.Windows.Forms.RadioButton();
+            this.fracNumUpDown = new System.Windows.Forms.NumericUpDown();
+            this.fracSepLabel = new System.Windows.Forms.Label();
+            this.fracDenUpDown = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.fileGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fracNumUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fracDenUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutBox
@@ -68,9 +74,9 @@
             // offsetBox
             // 
             this.offsetBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.offsetBox.Location = new System.Drawing.Point(66, 245);
+            this.offsetBox.Location = new System.Drawing.Point(90, 245);
             this.offsetBox.Name = "offsetBox";
-            this.offsetBox.Size = new System.Drawing.Size(100, 20);
+            this.offsetBox.Size = new System.Drawing.Size(120, 20);
             this.offsetBox.TabIndex = 5;
             this.offsetBox.Text = "0x0";
             this.offsetBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -81,29 +87,20 @@
             this.offsetLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.offsetLabel.Location = new System.Drawing.Point(12, 248);
             this.offsetLabel.Name = "offsetLabel";
-            this.offsetLabel.Size = new System.Drawing.Size(48, 13);
+            this.offsetLabel.Size = new System.Drawing.Size(72, 13);
             this.offsetLabel.TabIndex = 6;
             this.offsetLabel.Text = "Offset:";
             // 
             // countBox
             // 
             this.countBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.countBox.Location = new System.Drawing.Point(66, 271);
+            this.countBox.Location = new System.Drawing.Point(90, 271);
             this.countBox.Name = "countBox";
-            this.countBox.Size = new System.Drawing.Size(100, 20);
+            this.countBox.Size = new System.Drawing.Size(120, 20);
             this.countBox.TabIndex = 7;
             this.countBox.Text = "1";
             this.countBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.countBox.TextChanged += new System.EventHandler(this.countBox_TextChanged);
-            // 
-            // countLabel
-            // 
-            this.countLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.countLabel.Location = new System.Drawing.Point(12, 274);
-            this.countLabel.Name = "countLabel";
-            this.countLabel.Size = new System.Drawing.Size(48, 13);
-            this.countLabel.TabIndex = 8;
-            this.countLabel.Text = "Count:";
             // 
             // importButton
             // 
@@ -139,28 +136,6 @@
             this.fileGrid.DragDrop += new System.Windows.Forms.DragEventHandler(this.fileGrid_DragDrop);
             this.fileGrid.DragEnter += new System.Windows.Forms.DragEventHandler(this.fileGrid_DragEnter);
             // 
-            // regionLabel
-            // 
-            this.regionLabel.Location = new System.Drawing.Point(12, 15);
-            this.regionLabel.Name = "regionLabel";
-            this.regionLabel.Size = new System.Drawing.Size(48, 13);
-            this.regionLabel.TabIndex = 12;
-            this.regionLabel.Text = "Region:";
-            // 
-            // regionBox
-            // 
-            this.regionBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.regionBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.regionBox.FormattingEnabled = true;
-            this.regionBox.Items.AddRange(new object[] {
-            "Flat file"});
-            this.regionBox.Location = new System.Drawing.Point(66, 12);
-            this.regionBox.Name = "regionBox";
-            this.regionBox.Size = new System.Drawing.Size(386, 21);
-            this.regionBox.TabIndex = 11;
-            this.regionBox.SelectedIndexChanged += new System.EventHandler(this.regionBox_SelectedIndexChanged);
-            // 
             // name
             // 
             this.name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
@@ -188,25 +163,140 @@
             this.path.ReadOnly = true;
             this.path.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
+            // regionLabel
+            // 
+            this.regionLabel.Location = new System.Drawing.Point(12, 15);
+            this.regionLabel.Name = "regionLabel";
+            this.regionLabel.Size = new System.Drawing.Size(48, 13);
+            this.regionLabel.TabIndex = 12;
+            this.regionLabel.Text = "Region:";
+            // 
+            // regionBox
+            // 
+            this.regionBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.regionBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.regionBox.FormattingEnabled = true;
+            this.regionBox.Items.AddRange(new object[] {
+            "Flat file"});
+            this.regionBox.Location = new System.Drawing.Point(66, 12);
+            this.regionBox.Name = "regionBox";
+            this.regionBox.Size = new System.Drawing.Size(386, 21);
+            this.regionBox.TabIndex = 11;
+            this.regionBox.SelectedIndexChanged += new System.EventHandler(this.regionBox_SelectedIndexChanged);
+            // 
+            // countButton
+            // 
+            this.countButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.countButton.Checked = true;
+            this.countButton.Location = new System.Drawing.Point(12, 272);
+            this.countButton.Name = "countButton";
+            this.countButton.Size = new System.Drawing.Size(72, 17);
+            this.countButton.TabIndex = 13;
+            this.countButton.TabStop = true;
+            this.countButton.Text = "Count:";
+            this.countButton.UseVisualStyleBackColor = true;
+            this.countButton.CheckedChanged += new System.EventHandler(this.countButton_CheckedChanged);
+            // 
+            // fractionButton
+            // 
+            this.fractionButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.fractionButton.Location = new System.Drawing.Point(12, 297);
+            this.fractionButton.Name = "fractionButton";
+            this.fractionButton.Size = new System.Drawing.Size(72, 17);
+            this.fractionButton.TabIndex = 14;
+            this.fractionButton.Text = "Fraction:";
+            this.fractionButton.UseVisualStyleBackColor = true;
+            this.fractionButton.CheckedChanged += new System.EventHandler(this.fractionButton_CheckedChanged);
+            // 
+            // fracNumUpDown
+            // 
+            this.fracNumUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.fracNumUpDown.Enabled = false;
+            this.fracNumUpDown.Location = new System.Drawing.Point(90, 297);
+            this.fracNumUpDown.Maximum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.fracNumUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.fracNumUpDown.Name = "fracNumUpDown";
+            this.fracNumUpDown.Size = new System.Drawing.Size(48, 20);
+            this.fracNumUpDown.TabIndex = 15;
+            this.fracNumUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.fracNumUpDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.fracNumUpDown.ValueChanged += new System.EventHandler(this.fracNumUpDown_ValueChanged);
+            // 
+            // fracSepLabel
+            // 
+            this.fracSepLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.fracSepLabel.AutoSize = true;
+            this.fracSepLabel.Location = new System.Drawing.Point(144, 299);
+            this.fracSepLabel.Name = "fracSepLabel";
+            this.fracSepLabel.Size = new System.Drawing.Size(12, 13);
+            this.fracSepLabel.TabIndex = 16;
+            this.fracSepLabel.Text = "/";
+            // 
+            // fracDenUpDown
+            // 
+            this.fracDenUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.fracDenUpDown.Enabled = false;
+            this.fracDenUpDown.Location = new System.Drawing.Point(162, 297);
+            this.fracDenUpDown.Maximum = new decimal(new int[] {
+            1024,
+            0,
+            0,
+            0});
+            this.fracDenUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.fracDenUpDown.Name = "fracDenUpDown";
+            this.fracDenUpDown.Size = new System.Drawing.Size(48, 20);
+            this.fracDenUpDown.TabIndex = 17;
+            this.fracDenUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.fracDenUpDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.fracDenUpDown.ValueChanged += new System.EventHandler(this.fracDenUpDown_ValueChanged);
+            // 
             // TileImporter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(464, 332);
+            this.Controls.Add(this.fracDenUpDown);
+            this.Controls.Add(this.fracSepLabel);
+            this.Controls.Add(this.fracNumUpDown);
+            this.Controls.Add(this.fractionButton);
+            this.Controls.Add(this.countButton);
             this.Controls.Add(this.regionLabel);
             this.Controls.Add(this.regionBox);
             this.Controls.Add(this.fileGrid);
             this.Controls.Add(this.importButton);
-            this.Controls.Add(this.countLabel);
             this.Controls.Add(this.countBox);
             this.Controls.Add(this.offsetLabel);
             this.Controls.Add(this.offsetBox);
             this.Controls.Add(this.layoutLabel);
             this.Controls.Add(this.layoutBox);
             this.MaximizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(360, 260);
             this.Name = "TileImporter";
             this.Text = "Import Tiles";
             ((System.ComponentModel.ISupportInitialize)(this.fileGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fracNumUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fracDenUpDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -219,7 +309,6 @@
         private System.Windows.Forms.TextBox offsetBox;
         private System.Windows.Forms.Label offsetLabel;
         private System.Windows.Forms.TextBox countBox;
-        private System.Windows.Forms.Label countLabel;
         private System.Windows.Forms.Button importButton;
         private System.Windows.Forms.DataGridView fileGrid;
         private System.Windows.Forms.Label regionLabel;
@@ -227,5 +316,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn name;
         private System.Windows.Forms.DataGridViewButtonColumn browse;
         private System.Windows.Forms.DataGridViewTextBoxColumn path;
+        private System.Windows.Forms.RadioButton countButton;
+        private System.Windows.Forms.RadioButton fractionButton;
+        private System.Windows.Forms.NumericUpDown fracNumUpDown;
+        private System.Windows.Forms.Label fracSepLabel;
+        private System.Windows.Forms.NumericUpDown fracDenUpDown;
     }
 }

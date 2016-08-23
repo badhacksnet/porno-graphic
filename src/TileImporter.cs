@@ -23,21 +23,25 @@ namespace Porno_Graphic
             }
             set
             {
-                // TODO make this localisable
-
                 mProfile = value;
 
                 if (mProfile != null)
-                    Text = string.Format(Porno_Graphic.Properties.Resources.TileImporter_ImportTilesProfile, mProfile.Name);
+                    Text = string.Format(Porno_Graphic.Properties.Resources.TileImporter_PopulatedTitle, mProfile.Name);
                 else
-                    Text = Porno_Graphic.Properties.Resources.TileImporter_ImportTiles;
+                    Text = Porno_Graphic.Properties.Resources.TileImporter_UnpopulatedTitle;
 
                 while (regionBox.Items.Count > 1)
                     regionBox.Items.RemoveAt(regionBox.Items.Count - 1);
                 if ((mProfile != null) && (mProfile.LoadRegions != null))
                 {
                     foreach (Classes.LoadRegion region in mProfile.LoadRegions)
-                        regionBox.Items.Add(string.Format("{0} (0x{1:x} bytes)", region.Name, region.Length));
+                    {
+                        regionBox.Items.Add(
+                            string.Format(
+                                Porno_Graphic.Properties.Resources.TileImporter_RegionDisplayFormat,
+                                region.Name,
+                                region.Length));
+                    }
                 }
                 regionBox.SelectedIndex = 0;
 
@@ -45,7 +49,15 @@ namespace Porno_Graphic
                 if (mProfile != null)
                 {
                     foreach (Classes.CharLayout layout in mProfile.CharLayouts)
-                        layoutBox.Items.Add(string.Format("{0} ({1}×{2}×{3})", layout.Name, layout.Width, layout.Height, layout.Planes));
+                    {
+                        layoutBox.Items.Add(
+                            string.Format(
+                                Porno_Graphic.Properties.Resources.TileImporter_LayoutDisplayFormat,
+                                layout.Name,
+                                layout.Width,
+                                layout.Height,
+                                layout.Planes));
+                    }
                 }
             }
         }
@@ -75,26 +87,86 @@ namespace Porno_Graphic
                 countBox.ForeColor = Color.Black;
             else
                 countBox.ForeColor = Color.Red;
+            EnableImportButton();
+        }
+
+        private void fracNumUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            fracDenUpDown.Minimum = fracNumUpDown.Value;
+        }
+
+        private void fracDenUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            fracNumUpDown.Maximum = fracDenUpDown.Value;
+        }
+
+        private void countButton_CheckedChanged(object sender, EventArgs e)
+        {
+            countBox.Enabled = countButton.Checked;
+            if (countButton.Checked)
+                fractionButton.Checked = false;
+            EnableImportButton();
+        }
+
+        private void fractionButton_CheckedChanged(object sender, EventArgs e)
+        {
+            fracNumUpDown.Enabled = fractionButton.Checked;
+            fracDenUpDown.Enabled = fractionButton.Checked;
+            if (fractionButton.Checked)
+                countButton.Checked = false;
+            EnableImportButton();
         }
 
         private void importButton_Click(object sender, EventArgs e)
         {
-            // TODO make this localisable
-            // TODO better error messages
-
+            Classes.CharLayout layout = Profile.CharLayouts[layoutBox.SelectedIndex];
             byte[] data = null;
+            uint offset = ParseNumber(offsetBox.Text);
+            uint count;
             try
             {
                 if (regionBox.SelectedIndex == 0)
                 {
                     data = File.ReadAllBytes((string)fileGrid.Rows[0].Cells[2].Value);
+                    count = countButton.Checked ? ParseNumber(countBox.Text) : (uint)(8U * data.Length / layout.Stride * fracNumUpDown.Value / fracDenUpDown.Value);
+                    uint max = layout.MaxElements((uint)data.Length, offset);
+                    if (max < count)
+                    {
+                        string displayCount = countButton.Checked ? countBox.Text : count.ToString();
+                        MessageBox.Show(
+                            String.Format(
+                                Porno_Graphic.Properties.Resources.TileImporter_ErrorMessage_FileTooSmall,
+                                displayCount,
+                                offsetBox.Text,
+                                data.Length,
+                                max),
+                            Porno_Graphic.Properties.Resources.TileImporter_ErrorTitle_FileTooSmall);
+                        return;
+                    }
                 }
                 else
                 {
+                    Classes.LoadRegion region = Profile.LoadRegions[regionBox.SelectedIndex - 1];
+                    count = countButton.Checked ? ParseNumber(countBox.Text) : (uint)(8U * region.Length / layout.Stride * fracNumUpDown.Value / fracDenUpDown.Value);
+                    uint max = layout.MaxElements(region.Length, offset);
+                    if (max < count)
+                    {
+                        string displayCount = countButton.Checked ? countBox.Text : count.ToString();
+                        MessageBox.Show(
+                            String.Format(
+                                Porno_Graphic.Properties.Resources.TileImporter_ErrorMessage_RegionTooSmall,
+                                region.Name,
+                                region.Length,
+                                displayCount,
+                                offsetBox.Text,
+                                max),
+                            Porno_Graphic.Properties.Resources.TileImporter_ErrorTitle_RegionTooSmall);
+                        return;
+                    }
                     string[] paths = new string[fileGrid.Rows.Count];
                     for (int i = 0; i < paths.Length; i++)
                         paths[i] = (string)fileGrid.Rows[i].Cells[2].Value;
-                    data = Profile.LoadRegions[regionBox.SelectedIndex - 1].LoadFiles(paths);
+                    data = region.LoadFiles(paths);
                 }
             }
             catch (Classes.LoadPastEndOfFileException ex)
@@ -139,15 +211,6 @@ namespace Porno_Graphic
                 return;
             }
 
-            uint offset = ParseNumber(offsetBox.Text);
-            uint count = ParseNumber(countBox.Text);
-            Classes.CharLayout layout = Profile.CharLayouts[layoutBox.SelectedIndex];
-            if (layout.MaxElements(data, offset) < count)
-            {
-                MessageBox.Show(String.Format(Porno_Graphic.Properties.Resources.TileImporter_FileTooSmall, countBox.Text, offsetBox.Text));
-                return;
-            }
-
             Classes.GfxElement[] elements = new Classes.GfxElement[count];
             Parallel.For(0, count, index => { elements[index] = new Classes.GfxElement(data, layout, offset, (uint)index); });
 
@@ -164,51 +227,13 @@ namespace Porno_Graphic
             viewer.Show();
         }
 
-        private void EnableImportButton()
-        {
-            foreach (DataGridViewRow row in fileGrid.Rows)
-            {
-                if (row.Cells[2].Value.Equals(""))
-                {
-                    importButton.Enabled = false;
-                    return;
-                }
-            }
-            importButton.Enabled = (layoutBox.SelectedItem != null) && IsValidNumber(offsetBox.Text) && IsValidNumber(countBox.Text);
-        }
-
-        private bool IsValidNumber(string text)
-        {
-            uint temp;
-            NumberStyles style = NumberStyles.Integer;
-            if (text.StartsWith("0x", StringComparison.CurrentCultureIgnoreCase))
-            {
-                style = NumberStyles.HexNumber;
-                text = text.Substring(2);
-            }
-            return uint.TryParse(text, style, CultureInfo.CurrentCulture, out temp);
-        }
-
-        private uint ParseNumber(string text)
-        {
-            NumberStyles style = NumberStyles.Integer;
-            if (text.StartsWith("0x", StringComparison.CurrentCultureIgnoreCase))
-            {
-                style = NumberStyles.HexNumber;
-                text = text.Substring(2);
-            }
-            return uint.Parse(text, style, CultureInfo.CurrentCulture);
-        }
-
         private void regionBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // TODO make this localisable
-
             fileGrid.Rows.Clear();
             if (regionBox.SelectedIndex == 0)
             {
                 int i = fileGrid.Rows.Add();
-                fileGrid.Rows[i].Cells[0].Value = "data";
+                fileGrid.Rows[i].Cells[0].Value = Porno_Graphic.Properties.Resources.TileImporter_FlatFileDisplayName;
                 fileGrid.Rows[i].Cells[2].Value = "";
             }
             else
@@ -225,13 +250,11 @@ namespace Porno_Graphic
 
         private void fileGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            // TODO make this localisable
-
             if ((fileGrid.Columns[e.ColumnIndex].Name == "browse") && (e.RowIndex >= 0))
             {
                 OpenFileDialog dialog = new OpenFileDialog();
-                dialog.Title = string.Format("Select {0} file", fileGrid.Rows[e.RowIndex].Cells[0].Value);
-                dialog.Filter = "All Files (*.*) | *.*";
+                dialog.Title = string.Format(Porno_Graphic.Properties.Resources.TileImporter_OpenDataFileTitle, fileGrid.Rows[e.RowIndex].Cells[0].Value);
+                dialog.Filter = Porno_Graphic.Properties.Resources.TileImporter_OpenDataFileFilter;
                 dialog.FilterIndex = 1;
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
@@ -265,6 +288,52 @@ namespace Porno_Graphic
                     }
                 }
             }
+        }
+
+        private void EnableImportButton()
+        {
+            foreach (DataGridViewRow row in fileGrid.Rows)
+            {
+                if (row.Cells[2].Value.Equals(""))
+                {
+                    importButton.Enabled = false;
+                    return;
+                }
+            }
+            if (countButton.Checked && (!IsValidNumber(countBox.Text) || (ParseNumber(countBox.Text) < 1U)))
+            {
+                importButton.Enabled = false;
+                return;
+            }
+            if (fractionButton.Checked && ((fracNumUpDown.Value < 1U) || (fracNumUpDown.Value < 1U) || (fracNumUpDown.Value > fracDenUpDown.Value)))
+            {
+                importButton.Enabled = false;
+                return;
+            }
+            importButton.Enabled = (layoutBox.SelectedItem != null) && IsValidNumber(offsetBox.Text);
+        }
+
+        private bool IsValidNumber(string text)
+        {
+            uint temp;
+            NumberStyles style = NumberStyles.Integer;
+            if (text.StartsWith("0x", StringComparison.CurrentCultureIgnoreCase))
+            {
+                style = NumberStyles.HexNumber;
+                text = text.Substring(2);
+            }
+            return uint.TryParse(text, style, CultureInfo.CurrentCulture, out temp);
+        }
+
+        private uint ParseNumber(string text)
+        {
+            NumberStyles style = NumberStyles.Integer;
+            if (text.StartsWith("0x", StringComparison.CurrentCultureIgnoreCase))
+            {
+                style = NumberStyles.HexNumber;
+                text = text.Substring(2);
+            }
+            return uint.Parse(text, style, CultureInfo.CurrentCulture);
         }
     }
 }

@@ -38,13 +38,13 @@ namespace Porno_Graphic.Classes
             [XmlElement(ElementName = "offset", Form = XmlSchemaForm.Unqualified)]
             public Offset[] Offsets { get; set; }
 
-            public uint Offset(byte[] data, uint index) { return (uint)((Offsets[index].Bits * Multiplier) + (8 * data.Length * Offsets[index].FractionNumerator / Offsets[index].FractionDenominator)); }
+            public uint Offset(uint length, uint index) { return (Offsets[index].Bits * Multiplier) + (8 * length * Offsets[index].FractionNumerator / Offsets[index].FractionDenominator); }
 
-            public uint MaxOffset(byte[] data)
+            public uint MaxOffset(uint length)
             {
                 uint result = 0U;
                 for (uint i = 0; i < Offsets.Length; i++)
-                    result = Math.Max(result, Offset(data, i));
+                    result = Math.Max(result, Offset(length, i));
                 return result;
             }
 
@@ -73,17 +73,17 @@ namespace Porno_Graphic.Classes
         public uint Width { get { return (uint)X.Offsets.Length; } }
         public uint Height { get { return (uint)Y.Offsets.Length; } }
 
-        public uint PlaneOffset(byte[] data, uint index) { return Plane.Offset(data, index); }
-        public uint XOffset(byte[] data, uint index) { return X.Offset(data, index); }
-        public uint YOffset(byte[] data, uint index) { return Y.Offset(data, index); }
-        public uint MaxOffset(byte[] data, uint index) { return (Stride * index) + Plane.MaxOffset(data) + X.MaxOffset(data) + Y.MaxOffset(data); }
+        public uint PlaneOffset(byte[] data, uint index) { return Plane.Offset((uint)data.Length, index); }
+        public uint XOffset(byte[] data, uint index) { return X.Offset((uint)data.Length, index); }
+        public uint YOffset(byte[] data, uint index) { return Y.Offset((uint)data.Length, index); }
+        public uint MaxOffset(uint length, uint index) { return (Stride * index) + Plane.MaxOffset(length) + X.MaxOffset(length) + Y.MaxOffset(length); }
 
-        public uint MaxElements(byte[] data, uint offset)
+        public uint MaxElements(uint length, uint offset)
         {
-            if (data.Length < offset)
+            if (length < offset)
                 return 0U;
-            uint availableBits = (uint)((data.Length - offset) * 8U);
-            uint elementBits = MaxOffset(data, 0U) + 1;
+            uint availableBits = (length - offset) * 8U;
+            uint elementBits = MaxOffset(length, 0U) + 1;
             if (elementBits > (availableBits + Stride))
                 return 0U;
             else
