@@ -431,6 +431,33 @@ namespace Porno_Graphic.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error loading region {0}: attempt to fill offset 0x{2:x} which is beyond region length 0x{1:x} with value 0x{3:x2}. Please check the fill instructions in the selected profile..
+        /// </summary>
+        internal static string TileImporter_ErrorMessage_FillBeyondRegionEnd {
+            get {
+                return ResourceManager.GetString("TileImporter_ErrorMessage_FillBeyondRegionEnd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error loading region {0}: attempt to load from file {3} to offset 0x{2:x} which is beyond region length 0x{1:x}. Please check the load instructions in the selected profile..
+        /// </summary>
+        internal static string TileImporter_ErrorMessage_LoadBeyondRegionEnd {
+            get {
+                return ResourceManager.GetString("TileImporter_ErrorMessage_LoadBeyondRegionEnd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error loading file {0}: tried to read 0x{2:x} bytes to load at offset 0x{1:x} but only got 0x{3:x} bytes. Please check that the files match the region/locations and are large enough..
+        /// </summary>
+        internal static string TileImporter_ErrorMessage_ReadPastFileEnd {
+            get {
+                return ResourceManager.GetString("TileImporter_ErrorMessage_ReadPastFileEnd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error reading file.
         /// </summary>
         internal static string TileImporter_ErrorReadingFile {
@@ -440,11 +467,56 @@ namespace Porno_Graphic.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error: fill beyond end of region.
+        /// </summary>
+        internal static string TileImporter_ErrorTitle_FillBeyondRegionEnd {
+            get {
+                return ResourceManager.GetString("TileImporter_ErrorTitle_FillBeyondRegionEnd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error: load beyond end of region.
+        /// </summary>
+        internal static string TileImporter_ErrorTitle_LoadBeyondRegionEnd {
+            get {
+                return ResourceManager.GetString("TileImporter_ErrorTitle_LoadBeyondRegionEnd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error: read past end of file.
+        /// </summary>
+        internal static string TileImporter_ErrorTitle_ReadPastFileEnd {
+            get {
+                return ResourceManager.GetString("TileImporter_ErrorTitle_ReadPastFileEnd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to File is too small to load {0} element(s) from offset {1}.
         /// </summary>
         internal static string TileImporter_FileTooSmall {
             get {
                 return ResourceManager.GetString("TileImporter_FileTooSmall", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import Tiles.
+        /// </summary>
+        internal static string TileImporter_ImportTiles {
+            get {
+                return ResourceManager.GetString("TileImporter_ImportTiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import Tiles: {0}.
+        /// </summary>
+        internal static string TileImporter_ImportTilesProfile {
+            get {
+                return ResourceManager.GetString("TileImporter_ImportTilesProfile", resourceCulture);
             }
         }
     }

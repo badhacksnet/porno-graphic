@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="AboutPicture" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -699,5 +699,29 @@
   </data>
   <data name="TileImporter_FileTooSmall" xml:space="preserve">
     <value>File is too small to load {0} element(s) from offset {1}</value>
+  </data>
+  <data name="TileImporter_ErrorMessage_FillBeyondRegionEnd" xml:space="preserve">
+    <value>Error loading region {0}: attempt to fill offset 0x{2:x} which is beyond region length 0x{1:x} with value 0x{3:x2}. Please check the fill instructions in the selected profile.</value>
+  </data>
+  <data name="TileImporter_ErrorMessage_LoadBeyondRegionEnd" xml:space="preserve">
+    <value>Error loading region {0}: attempt to load from file {3} to offset 0x{2:x} which is beyond region length 0x{1:x}. Please check the load instructions in the selected profile.</value>
+  </data>
+  <data name="TileImporter_ErrorMessage_ReadPastFileEnd" xml:space="preserve">
+    <value>Error loading file {0}: tried to read 0x{2:x} bytes to load at offset 0x{1:x} but only got 0x{3:x} bytes. Please check that the files match the region/locations and are large enough.</value>
+  </data>
+  <data name="TileImporter_ErrorTitle_FillBeyondRegionEnd" xml:space="preserve">
+    <value>Error: fill beyond end of region</value>
+  </data>
+  <data name="TileImporter_ErrorTitle_LoadBeyondRegionEnd" xml:space="preserve">
+    <value>Error: load beyond end of region</value>
+  </data>
+  <data name="TileImporter_ErrorTitle_ReadPastFileEnd" xml:space="preserve">
+    <value>Error: read past end of file</value>
+  </data>
+  <data name="TileImporter_ImportTiles" xml:space="preserve">
+    <value>Import Tiles</value>
+  </data>
+  <data name="TileImporter_ImportTilesProfile" xml:space="preserve">
+    <value>Import Tiles: {0}</value>
   </data>
 </root>

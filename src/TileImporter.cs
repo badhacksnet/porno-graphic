@@ -28,9 +28,9 @@ namespace Porno_Graphic
                 mProfile = value;
 
                 if (mProfile != null)
-                    Text = string.Format("Import Tiles: {0}", mProfile.Name);
+                    Text = string.Format(Porno_Graphic.Properties.Resources.TileImporter_ImportTilesProfile, mProfile.Name);
                 else
-                    Text = "Import Tiles";
+                    Text = Porno_Graphic.Properties.Resources.TileImporter_ImportTiles;
 
                 while (regionBox.Items.Count > 1)
                     regionBox.Items.RemoveAt(regionBox.Items.Count - 1);
@@ -101,36 +101,36 @@ namespace Porno_Graphic
             {
                 MessageBox.Show(
                     string.Format(
-                        "Error loading file {0}: tried to read 0x{2:x} bytes to load at offset 0x{1:x} but only got 0x{3:x} bytes. Please check that the files match the region/locations and are large enough.",
+                        Porno_Graphic.Properties.Resources.TileImporter_ErrorMessage_ReadPastFileEnd,
                         ex.File.Name,
                         ex.Instruction.Offset,
                         ex.Instruction.Size,
                         ex.Read),
-                    "Error: read past end of file");
+                    Porno_Graphic.Properties.Resources.TileImporter_ErrorTitle_ReadPastFileEnd);
                 return;
             }
             catch (Classes.LoadOutsideRegionException ex)
             {
                 MessageBox.Show(
                     string.Format(
-                        "Error loading region {0}: attempt to load from file {3} to offset 0x{2:x} which is beyond region length 0x{1:x}. Please check the load instructions in the selected profile.",
+                        Porno_Graphic.Properties.Resources.TileImporter_ErrorMessage_LoadBeyondRegionEnd,
                         ex.Region.Name,
                         ex.Region.Length,
                         ex.Offset,
                         ex.File.Name),
-                    "Error: load beyond end of region");
+                    Porno_Graphic.Properties.Resources.TileImporter_ErrorTitle_LoadBeyondRegionEnd);
                 return;
             }
             catch (Classes.FillOutsideRegionException ex)
             {
                 MessageBox.Show(
                     string.Format(
-                        "Error loading region {0}: attempt to fill offset 0x{2:x} which is beyond region length 0x{1:x} with value 0x{3:x2}. Please check the fill instructions in the selected profile.",
+                        Porno_Graphic.Properties.Resources.TileImporter_ErrorMessage_FillBeyondRegionEnd,
                         ex.Region.Name,
                         ex.Region.Length,
                         ex.Offset,
                         ex.Fill.Value),
-                    "Error fill beyond end of region");
+                    Porno_Graphic.Properties.Resources.TileImporter_ErrorTitle_FillBeyondRegionEnd);
                 return;
             }
             catch
