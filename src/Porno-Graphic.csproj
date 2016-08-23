@@ -66,10 +66,13 @@
     <Compile Include="Classes\ElementGridView.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Classes\FillOutsideRegionException.cs" />
     <Compile Include="Classes\GameProfile.cs" />
     <Compile Include="Classes\GfxElement.cs" />
     <Compile Include="Classes\IndexedPalette.cs" />
     <Compile Include="Classes\IPalette.cs" />
+    <Compile Include="Classes\LoadOutsideRegionException.cs" />
+    <Compile Include="Classes\LoadPastEndOfFileException.cs" />
     <Compile Include="Classes\LoadRegion.cs" />
     <Compile Include="Classes\PaletteData.cs" />
     <Compile Include="Classes\SolidPalette.cs" />

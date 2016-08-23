@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Porno_Graphic
@@ -96,6 +97,42 @@ namespace Porno_Graphic
                     data = Profile.LoadRegions[regionBox.SelectedIndex - 1].LoadFiles(paths);
                 }
             }
+            catch (Classes.LoadPastEndOfFileException ex)
+            {
+                MessageBox.Show(
+                    string.Format(
+                        "Error loading file {0}: tried to read 0x{2:x} bytes to load at offset 0x{1:x} but only got 0x{3:x} bytes. Please check that the files match the region/locations and are large enough.",
+                        ex.File.Name,
+                        ex.Instruction.Offset,
+                        ex.Instruction.Size,
+                        ex.Read),
+                    "Error: read past end of file");
+                return;
+            }
+            catch (Classes.LoadOutsideRegionException ex)
+            {
+                MessageBox.Show(
+                    string.Format(
+                        "Error loading region {0}: attempt to load from file {3} to offset 0x{2:x} which is beyond region length 0x{1:x}. Please check the load instructions in the selected profile.",
+                        ex.Region.Name,
+                        ex.Region.Length,
+                        ex.Offset,
+                        ex.File.Name),
+                    "Error: load beyond end of region");
+                return;
+            }
+            catch (Classes.FillOutsideRegionException ex)
+            {
+                MessageBox.Show(
+                    string.Format(
+                        "Error loading region {0}: attempt to fill offset 0x{2:x} which is beyond region length 0x{1:x} with value 0x{3:x2}. Please check the fill instructions in the selected profile.",
+                        ex.Region.Name,
+                        ex.Region.Length,
+                        ex.Offset,
+                        ex.Fill.Value),
+                    "Error fill beyond end of region");
+                return;
+            }
             catch
             {
                 MessageBox.Show(Porno_Graphic.Properties.Resources.TileImporter_ErrorReadingFile);
@@ -112,8 +149,7 @@ namespace Porno_Graphic
             }
 
             Classes.GfxElement[] elements = new Classes.GfxElement[count];
-            for (uint i = 0; i < count; i++)
-                elements[i] = new Classes.GfxElement(data, layout, offset, i);
+            Parallel.For(0, count, index => { elements[index] = new Classes.GfxElement(data, layout, offset, (uint)index); });
 
             TileViewer viewer = new TileViewer();
             viewer.MdiParent = MdiParent;

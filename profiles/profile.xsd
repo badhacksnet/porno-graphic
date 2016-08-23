@@ -114,6 +114,7 @@
   </xs:complexType>
 
   <xs:complexType name="LoadFill">
+    <xs:attribute name="lanes" type="Lanes" default="8/byte" />
     <xs:attribute name="offset" type="ByteAddress" use="required" />
     <xs:attribute name="size" type="ByteAddress" use="required" />
     <xs:attribute name="value" type="FillValue" use="required" />
@@ -128,6 +129,7 @@
     </xs:sequence>
     <xs:attribute name="name" type="xs:string" use="required" />
     <xs:attribute name="length" type="ByteAddress" use="required" />
+    <xs:attribute name="erase" type="FillValue" use="optional" />
   </xs:complexType>
 
   <xs:complexType name="LoadRegionList">

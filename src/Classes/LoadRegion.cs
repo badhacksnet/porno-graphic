@@ -12,6 +12,30 @@ namespace Porno_Graphic.Classes
     [XmlRoot(ElementName = "region", Namespace = "http://baddesthacks.net/porno-graphic/profile")]
     public class LoadRegion
     {
+        public enum Lanes
+        {
+            [XmlEnum("8/byte")]
+            ByteByte,
+            [XmlEnum("16/byte")]
+            WordByte,
+            [XmlEnum("16/word")]
+            WordWord,
+            [XmlEnum("32/byte")]
+            DWordByte,
+            [XmlEnum("32/word")]
+            DWordWord,
+            [XmlEnum("32/dword")]
+            DWordDWord,
+            [XmlEnum("64/byte")]
+            QWordByte,
+            [XmlEnum("64/word")]
+            QWordWord,
+            [XmlEnum("64/dword")]
+            QWordDWord,
+            [XmlEnum("64/qword")]
+            QWordQWord
+        }
+
         public class Instruction
         {
             [XmlIgnore]
@@ -35,48 +59,14 @@ namespace Porno_Graphic.Classes
             }
         };
 
-        public class File
+        public abstract class LoadLanes
         {
-            public enum Lanes
-            {
-                [XmlEnum("8/byte")]
-                ByteByte,
-                [XmlEnum("16/byte")]
-                WordByte,
-                [XmlEnum("16/word")]
-                WordWord,
-                [XmlEnum("32/byte")]
-                DWordByte,
-                [XmlEnum("32/word")]
-                DWordWord,
-                [XmlEnum("32/dword")]
-                DWordDWord,
-                [XmlEnum("64/byte")]
-                QWordByte,
-                [XmlEnum("64/word")]
-                QWordWord,
-                [XmlEnum("64/dword")]
-                QWordDWord,
-                [XmlEnum("64/qword")]
-                QWordQWord
-            }
-
-            [XmlAttribute("name")]
-            public String Name { get; set; }
 
             [XmlIgnore]
             public uint Group { get; private set; }
 
             [XmlIgnore]
             public uint Skip { get; private set; }
-
-            [XmlAttribute("byteswap")]
-            public bool ByteSwap { get; set; }
-
-            [XmlElement(ElementName = "load", Form = XmlSchemaForm.Unqualified)]
-            public Instruction[] Instructions { get; set; }
-
-            public uint SwapMask { get { return ByteSwap ? (Group - 1U) : 0U; } }
 
             [XmlAttribute("lanes")]
             public Lanes SerializedLanes
@@ -176,15 +166,33 @@ namespace Porno_Graphic.Classes
                 }
             }
 
-            public File()
+            public LoadLanes()
             {
                 Group = 1U;
                 Skip = 0U;
+            }
+        };
+
+        public class File : LoadLanes
+        {
+            [XmlAttribute("name")]
+            public String Name { get; set; }
+
+            [XmlAttribute("byteswap")]
+            public bool ByteSwap { get; set; }
+
+            [XmlElement(ElementName = "load", Form = XmlSchemaForm.Unqualified)]
+            public Instruction[] Instructions { get; set; }
+
+            public uint SwapMask { get { return ByteSwap ? (Group - 1U) : 0U; } }
+
+            public File()
+            {
                 ByteSwap = false;
             }
         };
 
-        public class Fill
+        public class Fill : LoadLanes
         {
             [XmlIgnore]
             public uint Offset { get; set; }
@@ -212,7 +220,7 @@ namespace Porno_Graphic.Classes
             [XmlAttribute("value")]
             public string SerializedValue
             {
-                get { return Value.ToString("x"); }
+                get { return Value.ToString("x2"); }
                 set { Size = byte.Parse(value, NumberStyles.HexNumber); }
             }
         };
@@ -222,6 +230,12 @@ namespace Porno_Graphic.Classes
 
         [XmlIgnore]
         public uint Length { get; set; }
+
+        [XmlIgnore]
+        public bool Erase { get; set; }
+
+        [XmlIgnore]
+        public byte EraseValue { get; set; }
 
         [XmlElement(ElementName = "file", Form = XmlSchemaForm.Unqualified)]
         public File[] Files { get; set; }
@@ -236,9 +250,36 @@ namespace Porno_Graphic.Classes
             set { Length = uint.Parse(value, NumberStyles.HexNumber); }
         }
 
+        [XmlAttribute("erase")]
+        public string SerializedEraseValue
+        {
+            get
+            {
+                return Erase ? EraseValue.ToString("x2") : null;
+            }
+            set
+            {
+                if (value != null)
+                {
+                    EraseValue = byte.Parse(value, NumberStyles.HexNumber);
+                    Erase = true;
+                }
+                else
+                {
+                    Erase = false;
+                }
+            }
+        }
+
         public byte[] LoadFiles(string[] paths)
         {
             byte[] result = new byte[Length];
+            if (Erase)
+            {
+                for (uint i = 0; i < Length; i++)
+                    result[i] = EraseValue;
+            }
+            byte[] buffer = null;
             for (int i = 0; i < Files.Length; i++)
             {
                 File file = Files[i];
@@ -246,14 +287,21 @@ namespace Porno_Graphic.Classes
                 uint maxSize = 0;
                 foreach (Instruction instruction in file.Instructions)
                     maxSize = Math.Max(maxSize, instruction.Size);
-                byte[] buffer = new byte[maxSize];
-                foreach (Instruction instruction in file.Instructions)
+                if ((buffer == null) || (buffer.Length < maxSize))
+                    buffer = new byte[maxSize];
+                for (int j = 0; j < file.Instructions.Length; j++)
                 {
-                    stream.Read(buffer, 0, (int)instruction.Size);
+                    Instruction instruction = file.Instructions[j];
+                    int read = stream.Read(buffer, 0, (int)instruction.Size);
+                    if (read < instruction.Size)
+                        throw new LoadPastEndOfFileException(file, j, read);
                     uint destination = instruction.Offset;
                     for (uint source = 0; source < instruction.Size; source++)
                     {
-                        result[destination ^ file.SwapMask] = buffer[source];
+                        uint offset = destination ^ file.SwapMask;
+                        if (offset >= Length)
+                            throw new LoadOutsideRegionException(this, i, offset);
+                        result[offset] = buffer[source];
                         destination++;
                         if ((source % file.Group) == (file.Group - 1))
                             destination += file.Skip;
@@ -262,10 +310,19 @@ namespace Porno_Graphic.Classes
             }
             if (Fills != null)
             {
-                foreach (Fill fill in Fills)
+                for (int i = 0; i < Fills.Length; i++)
                 {
-                    for (uint i = 0; i < fill.Size; i++)
-                        result[fill.Offset + i] = fill.Value;
+                    Fill fill = Fills[i];
+                    uint destination = fill.Offset;
+                    for (uint source = 0; source < fill.Size; source++)
+                    {
+                        if (destination >= Length)
+                            throw new FillOutsideRegionException(this, i, destination);
+                        result[destination] = fill.Value;
+                        destination++;
+                        if ((source % fill.Group) == (fill.Group - 1))
+                            destination += fill.Skip;
+                    }
                 }
             }
             return result;
