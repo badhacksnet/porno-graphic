@@ -78,7 +78,7 @@
 
 	<!-- xxx: requires ROMREGION_INVERT -->
 	<regions>
-		<region name="Playfield" length="60000">
+		<region name="Playfield" length="60000" invert="true">
 			<file name="4n">
 				<load offset="000000" size="10000" />
 			</file>
@@ -99,7 +99,7 @@
 			</file>
 		</region>
 
-		<region name="Sprites" length="30000">
+		<region name="Sprites" length="30000" invert="true">
 			<file name="14r">
 				<load offset="00000" size="10000" />
 			</file>

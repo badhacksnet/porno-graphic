@@ -237,6 +237,9 @@ namespace Porno_Graphic.Classes
         [XmlIgnore]
         public byte EraseValue { get; set; }
 
+        [XmlAttribute("invert")]
+        public bool Invert { get; set; }
+
         [XmlElement(ElementName = "file", Form = XmlSchemaForm.Unqualified)]
         public File[] Files { get; set; }
 
@@ -271,6 +274,12 @@ namespace Porno_Graphic.Classes
             }
         }
 
+        public LoadRegion()
+        {
+            Erase = false;
+            Invert = false;
+        }
+
         public byte[] LoadFiles(string[] paths)
         {
             byte[] result = new byte[Length];
@@ -284,28 +293,35 @@ namespace Porno_Graphic.Classes
             {
                 File file = Files[i];
                 FileStream stream = new FileStream(paths[i], FileMode.Open, FileAccess.Read);
-                uint maxSize = 0;
-                foreach (Instruction instruction in file.Instructions)
-                    maxSize = Math.Max(maxSize, instruction.Size);
-                if ((buffer == null) || (buffer.Length < maxSize))
-                    buffer = new byte[maxSize];
-                for (int j = 0; j < file.Instructions.Length; j++)
+                try
                 {
-                    Instruction instruction = file.Instructions[j];
-                    int read = stream.Read(buffer, 0, (int)instruction.Size);
-                    if (read < instruction.Size)
-                        throw new LoadPastEndOfFileException(file, j, read);
-                    uint destination = instruction.Offset;
-                    for (uint source = 0; source < instruction.Size; source++)
+                    uint maxSize = 0;
+                    foreach (Instruction instruction in file.Instructions)
+                        maxSize = Math.Max(maxSize, instruction.Size);
+                    if ((buffer == null) || (buffer.Length < maxSize))
+                        buffer = new byte[maxSize];
+                    for (int j = 0; j < file.Instructions.Length; j++)
                     {
-                        uint offset = destination ^ file.SwapMask;
-                        if (offset >= Length)
-                            throw new LoadOutsideRegionException(this, i, offset);
-                        result[offset] = buffer[source];
-                        destination++;
-                        if ((source % file.Group) == (file.Group - 1))
-                            destination += file.Skip;
+                        Instruction instruction = file.Instructions[j];
+                        int read = stream.Read(buffer, 0, (int)instruction.Size);
+                        if (read < instruction.Size)
+                            throw new LoadPastEndOfFileException(file, j, read);
+                        uint destination = instruction.Offset;
+                        for (uint source = 0; source < instruction.Size; source++)
+                        {
+                            uint offset = destination ^ file.SwapMask;
+                            if (offset >= Length)
+                                throw new LoadOutsideRegionException(this, i, offset);
+                            result[offset] = buffer[source];
+                            destination++;
+                            if ((source % file.Group) == (file.Group - 1))
+                                destination += file.Skip;
+                        }
                     }
+                }
+                finally
+                {
+                    stream.Close();
                 }
             }
             if (Fills != null)
@@ -324,6 +340,11 @@ namespace Porno_Graphic.Classes
                             destination += fill.Skip;
                     }
                 }
+            }
+            if (Invert)
+            {
+                for (uint i = 0; i < Length; i++)
+                    result[i] = (byte)~result[i];
             }
             return result;
         }
