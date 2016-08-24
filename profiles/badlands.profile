@@ -76,7 +76,6 @@
 		<!-- todo: bootleg version playfield -->
 	</layouts>
 
-	<!-- xxx: requires ROMREGION_INVERT -->
 	<regions>
 		<region name="Playfield" length="60000" invert="true">
 			<file name="4n">
