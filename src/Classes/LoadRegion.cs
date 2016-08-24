@@ -186,6 +186,17 @@ namespace Porno_Graphic.Classes
 
             public uint SwapMask { get { return ByteSwap ? (Group - 1U) : 0U; } }
 
+            public uint LoadedLength
+            {
+                get
+                {
+                    uint result = 0;
+                    foreach (Instruction instruction in Instructions)
+                        result += instruction.Size;
+                    return result;
+                }
+            }
+
             public File()
             {
                 ByteSwap = false;

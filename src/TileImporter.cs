@@ -127,7 +127,7 @@ namespace Porno_Graphic
             {
                 if (regionBox.SelectedIndex == 0)
                 {
-                    data = File.ReadAllBytes((string)fileGrid.Rows[0].Cells[2].Value);
+                    data = File.ReadAllBytes((string)fileGrid.Rows[0].Cells[3].Value);
                     count = countButton.Checked ? ParseNumber(countBox.Text) : (uint)(8U * data.Length / layout.Stride * fracNumUpDown.Value / fracDenUpDown.Value);
                     uint max = layout.MaxElements((uint)data.Length, offset);
                     if (max < count)
@@ -165,7 +165,7 @@ namespace Porno_Graphic
                     }
                     string[] paths = new string[fileGrid.Rows.Count];
                     for (int i = 0; i < paths.Length; i++)
-                        paths[i] = (string)fileGrid.Rows[i].Cells[2].Value;
+                        paths[i] = (string)fileGrid.Rows[i].Cells[3].Value;
                     data = region.LoadFiles(paths);
                 }
             }
@@ -234,7 +234,8 @@ namespace Porno_Graphic
             {
                 int i = fileGrid.Rows.Add();
                 fileGrid.Rows[i].Cells[0].Value = Porno_Graphic.Properties.Resources.TileImporter_FlatFileDisplayName;
-                fileGrid.Rows[i].Cells[2].Value = "";
+                fileGrid.Rows[i].Cells[1].Value = "";
+                fileGrid.Rows[i].Cells[3].Value = "";
             }
             else
             {
@@ -242,7 +243,8 @@ namespace Porno_Graphic
                 {
                     int i = fileGrid.Rows.Add();
                     fileGrid.Rows[i].Cells[0].Value = file.Name;
-                    fileGrid.Rows[i].Cells[2].Value = "";
+                    fileGrid.Rows[i].Cells[1].Value = String.Format("0x{0:x}", file.LoadedLength);
+                    fileGrid.Rows[i].Cells[3].Value = "";
                 }
             }
             EnableImportButton();
@@ -258,7 +260,7 @@ namespace Porno_Graphic
                 dialog.FilterIndex = 1;
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    fileGrid.Rows[e.RowIndex].Cells[2].Value = dialog.FileName;
+                    fileGrid.Rows[e.RowIndex].Cells[3].Value = dialog.FileName;
                     EnableImportButton();
                 }
             }
@@ -283,7 +285,7 @@ namespace Porno_Graphic
                     int row = fileGrid.HitTest(cursorPosition.X, cursorPosition.Y).RowIndex;
                     if (row >= 0)
                     {
-                        fileGrid.Rows[row].Cells[2].Value = paths[0];
+                        fileGrid.Rows[row].Cells[3].Value = paths[0];
                         EnableImportButton();
                     }
                 }
@@ -294,7 +296,7 @@ namespace Porno_Graphic
         {
             foreach (DataGridViewRow row in fileGrid.Rows)
             {
-                if (row.Cells[2].Value.Equals(""))
+                if (row.Cells[3].Value.Equals(""))
                 {
                     importButton.Enabled = false;
                     return;
