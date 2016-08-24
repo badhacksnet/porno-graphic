@@ -68,8 +68,7 @@
 			</file>
 		</region>
 
-		<!-- ROMREGION_ERASEFF -->
-		<region name="Hebereke no Popoon" length="380000">
+		<region name="Hebereke no Popoon" length="380000" erase="ff">
 			<file name="hbpic98">
 				<load offset="000000" size="80000" />
 			</file>
@@ -93,8 +92,7 @@
 			</file>
 		</region>
 
-		<!-- ROMREGION_ERASEFF -->
-		<region name="Blocken" length="380000">
+		<region name="Blocken" length="380000" erase="ff">
 			<file name="ic98j">
 				<load offset="000000" size="80000" />
 			</file>
