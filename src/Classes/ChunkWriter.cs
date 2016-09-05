@@ -7,50 +7,13 @@ using System.Text;
 
 namespace Porno_Graphic.Classes
 {
-    public class ChunkWriter : IDisposable
+    public class ChunkWriter : ChunkIOBase
     {
-        private class ChunkInfo
-        {
-            public ChunkType Type { get; private set; }
-            public ulong Length { get; private set; }
-            public ulong Remaining { get; private set; }
-            public bool ContainsSubChunks { get; private set; }
-
-            public ChunkInfo(ChunkType type, ulong length)
-            {
-                Type = type;
-                Length = length;
-                Remaining = length;
-                ContainsSubChunks = false;
-            }
-
-            public void Consume(ulong size)
-            {
-                if (Remaining < size)
-                    throw new Exception(string.Format("Attempt to consume {0} bytes from chunk with {1} bytes remaining", size, Remaining));
-                Remaining -= size;
-            }
-
-            public void SetContainsSubChunks()
-            {
-                if (!ContainsSubChunks)
-                {
-                    if (Remaining < Length)
-                        throw new Exception(string.Format("Attempt to add subchunks to chunk containing {0} bytes of raw data", Length - Remaining));
-                    ContainsSubChunks = true;
-                }
-            }
-        };
-
         private bool mCompressing;
-        private Stream mStream;
-        private Stack<ChunkInfo> mOpenChunks;
 
-        public ChunkWriter(Stream stream)
+        public ChunkWriter(Stream stream) : base(stream)
         {
             mCompressing = false;
-            mStream = stream;
-            mOpenChunks = new Stack<ChunkInfo>();
         }
 
         public void OpenChunk(ChunkType type, ulong length)
@@ -193,21 +156,6 @@ namespace Porno_Graphic.Classes
                 throw new Exception("Attempt to start compression partway through chunk");
             mStream = new DeflateStream(mStream, CompressionMode.Compress);
             mCompressing = true;
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                if (mStream != null)
-                    mStream.Dispose();
-            }
         }
     }
 }

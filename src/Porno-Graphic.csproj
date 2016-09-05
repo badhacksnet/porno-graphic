@@ -61,7 +61,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\ChunkIOBase.cs" />
     <Compile Include="Classes\CharLayout.cs" />
+    <Compile Include="Classes\ChunkReader.cs" />
     <Compile Include="Classes\ChunkType.cs" />
     <Compile Include="Classes\ChunkWriter.cs" />
     <Compile Include="Classes\ElementGridView.cs">

@@ -704,7 +704,7 @@ namespace Porno_Graphic
                 project.Save(path);
                 return true;
             }
-            catch (Exception ex)
+            catch
             {
                 // TODO: better error messages
                 MessageBox.Show("Error saving project");
