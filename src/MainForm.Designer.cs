@@ -29,6 +29,7 @@
             this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItem_File_New = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItem_File_Import = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItem_File_Open = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItem_File_Save = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItem_File_SaveAs = new System.Windows.Forms.ToolStripMenuItem();
@@ -113,7 +114,6 @@
             this.activeColorsPanel = new System.Windows.Forms.Panel();
             this.panelActiveFGColor = new System.Windows.Forms.Panel();
             this.panelActiveBGColor = new System.Windows.Forms.Panel();
-            this.menuItem_File_Import = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenuStrip.SuspendLayout();
             this.mainStatusStrip.SuspendLayout();
             this.mainToolStrip.SuspendLayout();
@@ -157,6 +157,7 @@
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "&File";
+            this.fileToolStripMenuItem.DropDownOpening += new System.EventHandler(this.fileToolStripMenuItem_DropDownOpening);
             // 
             // menuItem_File_New
             // 
@@ -169,6 +170,13 @@
             this.menuItem_File_New.Size = new System.Drawing.Size(224, 22);
             this.menuItem_File_New.Text = "&New";
             this.menuItem_File_New.Click += new System.EventHandler(this.menuItem_File_New_Click);
+            // 
+            // menuItem_File_Import
+            // 
+            this.menuItem_File_Import.Name = "menuItem_File_Import";
+            this.menuItem_File_Import.Size = new System.Drawing.Size(224, 22);
+            this.menuItem_File_Import.Text = "Import Tiles...";
+            this.menuItem_File_Import.Click += new System.EventHandler(this.menuItem_File_Import_Click);
             // 
             // menuItem_File_Open
             // 
@@ -925,13 +933,6 @@
             this.panelActiveBGColor.Name = "panelActiveBGColor";
             this.panelActiveBGColor.Size = new System.Drawing.Size(32, 32);
             this.panelActiveBGColor.TabIndex = 0;
-            // 
-            // menuItem_File_Import
-            // 
-            this.menuItem_File_Import.Name = "menuItem_File_Import";
-            this.menuItem_File_Import.Size = new System.Drawing.Size(224, 22);
-            this.menuItem_File_Import.Text = "Import Tiles...";
-            this.menuItem_File_Import.Click += new System.EventHandler(this.menuItem_File_Import_Click);
             // 
             // MainForm
             // 

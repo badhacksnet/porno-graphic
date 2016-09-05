@@ -740,12 +740,30 @@
     <value>{0} ({1}×{2}×{3})</value>
   </data>
   <data name="TileImporter_OpenDataFileFilter" xml:space="preserve">
-    <value>All Files (*.*) | *.*</value>
+    <value>All Files (*.*)|*.*</value>
   </data>
   <data name="TileImporter_OpenDataFileTitle" xml:space="preserve">
     <value>Select {0} file</value>
   </data>
   <data name="TileImporter_RegionDisplayFormat" xml:space="preserve">
     <value>{0} (0x{1:x} bytes)</value>
+  </data>
+  <data name="MainForm_ConfirmMessage_CloseWithoutSave" xml:space="preserve">
+    <value>Do you want to save “{0}” before closing?</value>
+  </data>
+  <data name="MainForm_ConfirmTitle_CloseWithoutSave" xml:space="preserve">
+    <value>Save Before Closing</value>
+  </data>
+  <data name="MainForm_GameProfileFileFilter" xml:space="preserve">
+    <value>Game Profiles (.profile)|*.profile|All Files (*.*)|*.*</value>
+  </data>
+  <data name="MainForm_ImportProjectFormat" xml:space="preserve">
+    <value>Import {0}</value>
+  </data>
+  <data name="MainForm_ProjectFileFilter" xml:space="preserve">
+    <value>Porno-Graphic Projects (*.porn)|*.porn|All Files (*.*)|*.*</value>
+  </data>
+  <data name="MainForm_SaveProjectTitleFormat" xml:space="preserve">
+    <value>Save “{0}” As</value>
   </data>
 </root>

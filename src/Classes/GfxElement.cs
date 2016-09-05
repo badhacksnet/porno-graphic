@@ -69,6 +69,21 @@ namespace Porno_Graphic.Classes
             }
         }
 
+        public void Write(ChunkWriter writer)
+        {
+            writer.OpenChunk(ChunkType.GfxElement, 8U + (4U * Width * Height));
+            writer.Write(Width);
+            writer.Write(Height);
+            for (uint pixel = 0; pixel < (Width * Height); pixel++)
+                writer.Write(Pixels[pixel]);
+            writer.CloseChunk();
+        }
+
+        public ulong ChunkSize()
+        {
+            return 16U + 8U + (4U * Width * Height);
+        }
+
         public void Draw(Graphics graphics, IPalette palette, int[,] transform)
         {
             Rectangle rowStart = new Rectangle(transform[0, 2], transform[1, 2], transform[0, 0] + transform[0, 1], transform[1, 0] + transform[1, 1]);

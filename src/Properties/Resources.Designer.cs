@@ -251,6 +251,60 @@ namespace Porno_Graphic.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Do you want to save “{0}” before closing?.
+        /// </summary>
+        internal static string MainForm_ConfirmMessage_CloseWithoutSave {
+            get {
+                return ResourceManager.GetString("MainForm_ConfirmMessage_CloseWithoutSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save Before Closing.
+        /// </summary>
+        internal static string MainForm_ConfirmTitle_CloseWithoutSave {
+            get {
+                return ResourceManager.GetString("MainForm_ConfirmTitle_CloseWithoutSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Game Profiles (.profile)|*.profile|All Files (*.*)|*.*.
+        /// </summary>
+        internal static string MainForm_GameProfileFileFilter {
+            get {
+                return ResourceManager.GetString("MainForm_GameProfileFileFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import {0}.
+        /// </summary>
+        internal static string MainForm_ImportProjectFormat {
+            get {
+                return ResourceManager.GetString("MainForm_ImportProjectFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Porno-Graphic Projects (*.porn)|*.porn|All Files (*.*)|*.*.
+        /// </summary>
+        internal static string MainForm_ProjectFileFilter {
+            get {
+                return ResourceManager.GetString("MainForm_ProjectFileFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save “{0}” As.
+        /// </summary>
+        internal static string MainForm_SaveProjectTitleFormat {
+            get {
+                return ResourceManager.GetString("MainForm_SaveProjectTitleFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap NewDocument {
@@ -548,7 +602,7 @@ namespace Porno_Graphic.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to All Files (*.*) | *.*.
+        ///   Looks up a localized string similar to All Files (*.*)|*.*.
         /// </summary>
         internal static string TileImporter_OpenDataFileFilter {
             get {

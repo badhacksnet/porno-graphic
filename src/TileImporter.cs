@@ -13,7 +13,9 @@ namespace Porno_Graphic
 {
     public partial class TileImporter : Form
     {
+        private MainForm mParent;
         private Classes.GameProfile mProfile;
+        private string mProfilePath;
 
         public Classes.GameProfile Profile
         {
@@ -24,6 +26,7 @@ namespace Porno_Graphic
             set
             {
                 mProfile = value;
+                mProfilePath = null;
 
                 if (mProfile != null)
                     Text = string.Format(Porno_Graphic.Properties.Resources.TileImporter_PopulatedTitle, mProfile.Name);
@@ -62,9 +65,13 @@ namespace Porno_Graphic
             }
         }
 
-        public TileImporter()
+        public TileImporter(MainForm parent, Classes.GameProfile profile, string profilePath)
         {
             InitializeComponent();
+            mParent = parent;
+            MdiParent = parent;
+            Profile = profile;
+            mProfilePath = profilePath;
         }
 
         private void layoutBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -214,17 +221,20 @@ namespace Porno_Graphic
             Classes.GfxElement[] elements = new Classes.GfxElement[count];
             Parallel.For(0, count, index => { elements[index] = new Classes.GfxElement(data, layout, offset, (uint)index); });
 
-            TileViewer viewer = new TileViewer();
-            viewer.MdiParent = MdiParent;
-            viewer.ElementWidth = layout.Width;
-            viewer.ElementHeight = layout.Height;
-            viewer.Elements = elements;
-            if (layout.Planes > 3)
-                viewer.Palette = Classes.IndexedPalette.RGBI;
-            else
-                viewer.Palette = Classes.IndexedPalette.RGB;
+            Classes.TileImportMetadata metadata = new Classes.TileImportMetadata();
+            if (mProfilePath != null)
+                metadata.ProfileFile = Path.GetFileName(mProfilePath);
+            metadata.ProfileName = mProfile.Name;
+            metadata.RegionName = (string)regionBox.SelectedItem;
+            metadata.LayoutName = (string)layoutBox.SelectedItem;
+            metadata.Offset = offsetBox.Text;
+            Classes.GfxElementSet elementSet = new Classes.GfxElementSet();
+            elementSet.ElementWidth = layout.Width;
+            elementSet.ElementHeight = layout.Height;
+            elementSet.Elements = elements;
+            elementSet.ImportMetadata = metadata;
+            mParent.CreateImportProject(elementSet, (layout.Planes > 3) ? Classes.IndexedPalette.RGBI : Classes.IndexedPalette.RGB);
             Close();
-            viewer.Show();
         }
 
         private void regionBox_SelectedIndexChanged(object sender, EventArgs e)

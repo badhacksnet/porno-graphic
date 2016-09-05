@@ -15,30 +15,15 @@ namespace Porno_Graphic
 {
 	public partial class TileViewer : Form
 	{
-        /* todo: things we might need for each tile viewer...
-		 * - File this window is associated with (or null if unsaved new file)
-		 * - Current location in file
-		 * - Current encoding type (e.g. 1bpp, 2bpp nes, etc.)
-		 * - Currently selected tile
-		 * - Current active palette
-		 */
-
         public uint ElementWidth { get { return tileGrid.ElementWidth; } set { tileGrid.ElementWidth = value; } }
         public uint ElementHeight { get { return tileGrid.ElementHeight; } set { tileGrid.ElementHeight = value; } }
         public Classes.GfxElement[] Elements { get { return tileGrid.Elements; } set { tileGrid.Elements = value; } }
         public Classes.IPalette Palette { get { return tileGrid.Palette; } set { tileGrid.Palette = value; } }
 
-        public bool ShowGrid;
-		public bool IsDirty; // Is the data is "dirty"? (has been edited since previous save)
-
 		public TileViewer() {
 			InitializeComponent();
 
             rotate.SelectedIndex = 0;
-
-			/* initialize tile viewer variables */
-			ShowGrid = false; // xxx: should use current setting
-			IsDirty = false;
 		}
 
 		private void TileViewer_Resize(object sender, EventArgs e) {

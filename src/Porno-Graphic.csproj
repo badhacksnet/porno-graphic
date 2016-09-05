@@ -62,20 +62,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\CharLayout.cs" />
-    <Compile Include="Classes\DirectBitmap.cs" />
+    <Compile Include="Classes\ChunkType.cs" />
+    <Compile Include="Classes\ChunkWriter.cs" />
     <Compile Include="Classes\ElementGridView.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Classes\FillOutsideRegionException.cs" />
     <Compile Include="Classes\GameProfile.cs" />
     <Compile Include="Classes\GfxElement.cs" />
+    <Compile Include="Classes\GfxElementSet.cs" />
     <Compile Include="Classes\IndexedPalette.cs" />
     <Compile Include="Classes\IPalette.cs" />
     <Compile Include="Classes\LoadOutsideRegionException.cs" />
     <Compile Include="Classes\LoadPastEndOfFileException.cs" />
     <Compile Include="Classes\LoadRegion.cs" />
-    <Compile Include="Classes\PaletteData.cs" />
+    <Compile Include="Classes\Project.cs" />
     <Compile Include="Classes\SolidPalette.cs" />
+    <Compile Include="Classes\TileImportMetadata.cs" />
+    <Compile Include="Classes\TileViewerState.cs" />
     <Compile Include="Dialogs\AboutDialog.cs">
       <SubType>Form</SubType>
     </Compile>

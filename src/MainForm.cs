@@ -12,6 +12,18 @@ namespace Porno_Graphic
 {
 	public partial class MainForm : Form
 	{
+        private class ProjectState
+        {
+            public Classes.Project Project { get; private set; }
+            public TileViewer TileViewer { get; set; }
+
+            public ProjectState(Classes.Project project)
+            {
+                Project = project;
+                TileViewer = null;
+            }
+        }
+
 		/* -- types and shit -- */
 		public enum ToolTypes {
 			Tool_Pointer = 0,
@@ -28,10 +40,12 @@ namespace Porno_Graphic
 			NUM_ToolTypes
 		};
 
-		/* -- main form variables -- */
+        /* -- main form variables -- */
+        private int mImportCount = 0;
 		public int NewFileCount = 0;
 		public int NumOpenDocuments = 0;
 		public ToolTypes curActiveTool;
+        private ProjectState mActiveProject = null;
 
 		/* -- other important things -- */
 		TileArranger arrangerForm; // the tile arranger/scratchboard
@@ -400,12 +414,16 @@ namespace Porno_Graphic
 		 * ShowSaveFileDialog()
 		 * Shows the save file dialog.
 		 */
-		protected void ShowSaveFileDialog() {
-			SaveFileDialog sfd = new SaveFileDialog();
-			sfd.Filter = defaultSaveFilter;
-			if (sfd.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
-				/* save file data */
-			}
+		protected bool ShowSaveFileDialog(Classes.Project project)
+        {
+			SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Filter = Properties.Resources.MainForm_ProjectFileFilter;
+            dialog.FilterIndex = 1;
+            dialog.Title = string.Format(Properties.Resources.MainForm_SaveProjectTitleFormat, mActiveProject.Project.DisplayName);
+            if (dialog.ShowDialog() == DialogResult.OK)
+                return SaveProject(project, dialog.FileName);
+            else
+                return false;
 		}
 
 		/*
@@ -444,7 +462,8 @@ namespace Porno_Graphic
 		#region ShowSaveFileDialog callers
 		/* Routines that call ShowSaveFileDialog */
 		private void menuItem_File_SaveAs_Click(object sender, EventArgs e) {
-			ShowSaveFileDialog();
+            if (mActiveProject != null)
+			    ShowSaveFileDialog(mActiveProject.Project);
 		}
 		#endregion
 
@@ -461,7 +480,13 @@ namespace Porno_Graphic
 		#region Regular saving routines
 		/* Routines that only call ShowSaveFileDialog if this is a new file */
 		private void menuItem_File_Save_Click(object sender, EventArgs e) {
-
+            if (mActiveProject != null)
+            {
+                if (mActiveProject.Project.FilePath != null)
+                    SaveProject(mActiveProject.Project, mActiveProject.Project.FilePath);
+                else
+                    ShowSaveFileDialog(mActiveProject.Project);
+            }
 		}
 
 		private void mainToolStrip_Button_Save_Click(object sender, EventArgs e) {
@@ -575,7 +600,7 @@ namespace Porno_Graphic
 
             OpenFileDialog openProfileDialog = new OpenFileDialog();
             openProfileDialog.Title = "Select Profile";
-            openProfileDialog.Filter = "Game Profiles (.profile)|*.profile|All Files (*.*)|*.*";
+            openProfileDialog.Filter = Properties.Resources.MainForm_GameProfileFileFilter;
             openProfileDialog.FilterIndex = 1;
             openProfileDialog.Multiselect = false;
             if (openProfileDialog.ShowDialog() != DialogResult.OK)
@@ -605,10 +630,86 @@ namespace Porno_Graphic
                 return;
             }
 
-            TileImporter importer = new TileImporter();
-            importer.MdiParent = this;
-            importer.Profile = profile;
+            TileImporter importer = new TileImporter(this, profile, openProfileDialog.FileName);
             importer.Show();
+        }
+
+        public void CreateImportProject(Classes.GfxElementSet elementSet, Classes.IPalette palette)
+        {
+            string displayName = string.Format(Porno_Graphic.Properties.Resources.MainForm_ImportProjectFormat, ++mImportCount);
+            Classes.Project project = new Classes.Project(displayName, elementSet);
+            TileViewer viewer = new TileViewer();
+            viewer.MdiParent = this;
+            viewer.ElementWidth = elementSet.ElementWidth;
+            viewer.ElementHeight = elementSet.ElementHeight;
+            viewer.Elements = elementSet.Elements;
+            viewer.Palette = palette;
+
+            ProjectState state = new ProjectState(project);
+            state.TileViewer = viewer;
+
+            viewer.Activated += new EventHandler(delegate (Object sender, EventArgs e)
+            {
+                mActiveProject = state;
+            });
+
+            viewer.FormClosing += new FormClosingEventHandler(delegate (object sender, FormClosingEventArgs e)
+            {
+                if (state.Project.Dirty)
+                {
+                    DialogResult result = MessageBox.Show(
+                        string.Format(Properties.Resources.MainForm_ConfirmMessage_CloseWithoutSave, state.Project.DisplayName),
+                        Properties.Resources.MainForm_ConfirmTitle_CloseWithoutSave,
+                        MessageBoxButtons.YesNoCancel,
+                        MessageBoxIcon.None,
+                        MessageBoxDefaultButton.Button1);
+                    switch (result)
+                    {
+                        case DialogResult.Yes:
+                            if (state.Project.FilePath != null)
+                                e.Cancel = !SaveProject(state.Project, state.Project.FilePath);
+                            else
+                                e.Cancel = !ShowSaveFileDialog(state.Project);
+                            break;
+                        case DialogResult.No:
+                            e.Cancel = false;
+                            break;
+                        case DialogResult.Cancel:
+                            e.Cancel = true;
+                            break;
+                    }
+                }
+            });
+
+            viewer.FormClosed += new FormClosedEventHandler(delegate (object sender, FormClosedEventArgs e)
+            {
+                if (mActiveProject == state)
+                    mActiveProject = null;
+            });
+
+            viewer.Show();
+        }
+
+        private void fileToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
+        {
+            menuItem_File_Save.Enabled = mActiveProject != null;
+            menuItem_File_SaveAs.Enabled = mActiveProject != null;
+            menuItem_File_Reload.Enabled = (mActiveProject != null) && (mActiveProject.Project.FilePath != null);
+        }
+
+        private bool SaveProject(Classes.Project project, string path)
+        {
+            try
+            {
+                project.Save(path);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // TODO: better error messages
+                MessageBox.Show("Error saving project");
+                return false;
+            }
         }
     }
 }
