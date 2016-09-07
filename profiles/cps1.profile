@@ -191,6 +191,7 @@
   </layouts>
 
   <regions>
+  
     <region name="Forgotten Worlds 88618B-2" length="400000">
       <file name="9d" lanes="64/word">
         <load offset="000000" size="80000" />
@@ -697,7 +698,8 @@
         <load offset="200007" size="20000" />
       </file>
     </region>
-	<region name = "Final Fight/1941/Mercs 89624B-3 (World and USA)" length="200000">
+	
+	<region name="Final Fight/1941/Mercs 89624B-3 (World and USA)" length="200000">
 	  <file name="7a" lanes="64/word">
         <load offset="000000" size="80000" />
      </file>
@@ -711,7 +713,8 @@
         <load offset="000006" size="80000" />
      </file>
 	</region>
-		<region name = "Final Fight/1941/Mercs 88622B-3/89625B-1 (Japan)" length="200000">
+	
+	<region name="Final Fight/1941/Mercs 88622B-3/89625B-1 (Japan)" length="200000">
 	  <file name="4b" lanes="64/byte">
         <load offset="000000" size="20000" />
      </file>
@@ -761,7 +764,8 @@
         <load offset="100007" size="20000" />
      </file>
 	</region>
-	<region name = "Final Fight 91634B-2 (Japan Hack)" length="200000">
+	
+	<region name="Final Fight 91634B-2 (Japan Hack)" length="200000">
 	  <file name="3a" lanes="64/word">
         <load offset="000000" size="80000" />
      </file>
@@ -775,7 +779,8 @@
         <load offset="000006" size="80000" />
      </file>
 	</region>
-	<region name = "Street Fighter II 90629B (World/USA)" length="900000">
+	
+	<region name="Street Fighter II 90629B (World/USA)" length="900000">
 	 <file name="4a" lanes="64/word">
 	  <load offset="000000" size="80000" />
 	 </file>
@@ -813,7 +818,8 @@
 	  <load offset="400006" size="80000" />
 	 </file>
 	</region>
-	<region name = "Street Fighter II 90629B (Japan)" length="900000">
+	
+	<region name="Street Fighter II 90629B (Japan)" length="900000">
 	 <file name="8a" lanes="64/word">
 	  <load offset="000000" size="80000" />
 	 </file>
@@ -851,7 +857,8 @@
 	  <load offset="400006" size="80000" />
 	 </file>
 	</region>
-	<region name = "Knights of the Round 91635B-2 (World, USA)" length="400000">
+	
+	<region name="Knights of the Round 91635B-2 (World, USA)" length="400000">
 	 <file name="3a" lanes="64/word">
 	  <load offset="000000" size="80000" />
 	 </file>
@@ -877,7 +884,8 @@
 	  <load offset="200006" size="80000" />
 	 </file>
 	</region>
-	<region name = "Knights of the Round 91634-2 (Japan)" length="400000">
+	
+	<region name="Knights of the Round 91634-2 (Japan)" length="400000">
 	 <file name="3a" lanes="64/word">
 	  <load offset="000000" size="80000" />
 	 </file>
@@ -903,7 +911,8 @@
 	  <load offset="200006" size="80000" />
 	 </file>
 	</region>
-	<region name = "Knights of the Round 89625B-1 (Japan)" length="400000">
+	
+	<region name="Knights of the Round 89625B-1 (Japan)" length="400000">
 	 <file name="4b" lanes="64/byte">
 	  <load offset="000000" size="20000" />
 	 </file>
@@ -1001,7 +1010,8 @@
 	  <load offset="300007" size="20000" />
 	 </file>
 	</region>
-	<region name = "Street Fighter II Champion Edition 91635B-2 (World/USA)" length="900000">
+	
+	<region name="Street Fighter II Champion Edition 91635B-2 (World/USA)" length="900000">
 	 <file name="3a" lanes="64/word">
 	  <load offset="000000" size="80000" />
 	 </file>
@@ -1039,7 +1049,8 @@
 	  <load offset="400006" size="80000" />
 	 </file>
 	</region>
-	<region name = "Street Fighter II Champion Edition 91634B-2 (Japan)" length="900000">
+	
+	<region name="Street Fighter II Champion Edition 91634B-2 (Japan)" length="900000">
 	 <file name="3a" lanes="64/word">
 	  <load offset="000000" size="80000" />
 	 </file>
@@ -1077,7 +1088,8 @@
 	  <load offset="400006" size="80000" />
 	 </file>
 	</region>
-	<region name = "Street Fighter II Champion Edition (Rainbow & Derivative Hacks)" length="900000">
+	
+	<region name="Street Fighter II Champion Edition (Rainbow Derivative Hacks)" length="900000">
 	 <file name="s92_01" lanes="64/word">
 	  <load offset="000000" size="80000" />
 	 </file>
@@ -1115,5 +1127,6 @@
 	  <load offset="400006" size="80000" />
 	 </file>
 	</region>
+	
   </regions>
 </profile:profile>
